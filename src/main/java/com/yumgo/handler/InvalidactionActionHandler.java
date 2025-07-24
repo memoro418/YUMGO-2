@@ -1,15 +1,13 @@
-package com.yumgo.handler.member;
+package com.yumgo.handler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.yumgo.handler.CommandHandler;
-
-public class UserInsertGetHandler implements CommandHandler {
+public class InvalidactionActionHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) {
-		return "member/memberform.jsp";
+		return "error/invalidaction.jsp";
 	}
 
 }

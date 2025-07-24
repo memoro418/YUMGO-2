@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                             http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+  <display-name>YUMGO</display-name>
+
+  <!-- 기본 시작 페이지 -->
+  <welcome-file-list>
+    <welcome-file>home.do</welcome-file>
+  </welcome-file-list>
+
+  <!-- DispatcherServlet 등록 -->
+  <servlet>
+    <servlet-name>DispatcherServlet</servlet-name>
+    <servlet-class>com.yumgo.web.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>configFile</param-name>
+      <param-value>/WEB-INF/command.properties</param-value>
+    </init-param>
+  </servlet>
+
+  <!-- *.do 요청은 DispatcherServlet이 처리 -->
+  <servlet-mapping>
+    <servlet-name>DispatcherServlet</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+
+  <!-- 예외 및 오류 페이지 설정 -->
+  <error-page>
+    <exception-type>java.lang.RuntimeException</exception-type>
+    <location>/WEB-INF/views/error/runtime.jsp</location>
+  </error-page>
+
+  <error-page>
+    <error-code>404</error-code>
+    <location>/WEB-INF/views/error/error404.jsp</location>
+  </error-page>
+
+</web-app>
