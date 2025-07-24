@@ -8,4 +8,5 @@ public class Recipe {
 	private String summary;
 	private String cookingTime;
 	private String calorie;
+
 }

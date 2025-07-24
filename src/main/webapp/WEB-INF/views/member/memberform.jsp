@@ -44,4 +44,8 @@
 </fieldset>
 </form>
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> 1a43563 (Upload YUMGO-WEB to Loopy branch)

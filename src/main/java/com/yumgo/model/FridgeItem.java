@@ -13,4 +13,5 @@ public class FridgeItem {
 	private Date insertedAt;
 	private String foodName;
 	private String username;
+
 }
