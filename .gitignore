@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 /target/
 /bin/
 /.settings/
@@ -9,7 +9,9 @@
 *.swp
 *.iml
 *.DS_Store
-=======
+build/
+bin/
+*.class
 # ========== STS / Eclipse ==========
 .classpath
 .project
@@ -42,4 +44,4 @@ dependency-reduced-pom.xml
 # ========== 기타 ==========
 *.swp
 *.tmp
->>>>>>> 1a43563 (Upload YUMGO-WEB to Loopy branch)
+
