@@ -7,7 +7,7 @@ import com.yumgo.dao.UserDAO;
 import com.yumgo.handler.CommandHandler;
 import com.yumgo.model.User;
 
-public class UserInsertPostHandler implements CommandHandler {
+public class MemberInsertPostHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) {

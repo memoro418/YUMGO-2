@@ -5,11 +5,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.yumgo.handler.CommandHandler;
 
-public class UserInsertGetHandler implements CommandHandler {
+public class MemberInsertGetHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) {
-		return "member/memberform.jsp";
+		return "login/memberform.jsp";
 	}
 
 }
