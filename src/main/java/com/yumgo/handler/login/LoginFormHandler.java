@@ -1,27 +1,29 @@
-package com.yumgo.handler;
+package com.yumgo.handler.login;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class HomeHandler implements CommandHandler {
+import com.yumgo.handler.CommandHandler;
+
+/**
+ * 로그인 폼을 보여주는 핸들러
+ */
+public class LoginFormHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		// 세션에서 사용자 정보 확인
+		// 이미 로그인된 사용자는 메인 페이지로 리다이렉트
 		HttpSession session = request.getSession(false);
 		if (session != null) {
 			String username = (String) session.getAttribute("username");
 			if (username != null) {
-				request.setAttribute("welcomeMessage", username + "님, 환영합니다!");
+				return "redirect:/index.do";
 			}
 		}
 
-		// 메인 페이지 정보 설정
-		request.setAttribute("pageTitle", "YUMGO - 냉장고 관리 시스템");
-		request.setAttribute("currentPage", "home");
-
-		return "index.jsp";
+		// 로그인 폼 페이지로 이동
+		return "login/loginform.jsp";
 	}
 }
