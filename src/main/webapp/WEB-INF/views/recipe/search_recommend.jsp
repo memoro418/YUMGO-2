@@ -10,15 +10,18 @@
     <h2>🥕 재료 기반 레시피 추천</h2>
     <form method="post" action="/recipe/search_recommend.do">
         <input type="hidden" name="type" value="recommend">
-        <input type="text" name="ingredientName" placeholder="예: 감자, 양파 등">
+        <input type="text" name="ingredientName" placeholder="예: 감자, 양파 등" value="${ingredientName}">
         <button type="submit">추천받기</button>
     </form>
-
+    
     <c:if test="${not empty recipes}">
         <h3>추천된 레시피 목록</h3>
         <ul>
             <c:forEach var="recipe" items="${recipes}">
-                <li>${recipe.name}</li>
+                <li>
+                    ${recipe.name} 
+                    <a href="/recipe/detail.do?name=${recipe.name}">상세보기</a>
+                </li>
             </c:forEach>
         </ul>
     </c:if>
@@ -28,7 +31,7 @@
     <h2>🍲 레시피 이름으로 재료 검색</h2>
     <form method="post" action="/recipe/search_recommend.do">
         <input type="hidden" name="type" value="search">
-        <input type="text" name="recipeName" placeholder="예: 감자조림">
+        <input type="text" name="recipeName" placeholder="예: 감자조림" value="${recipeName}">
         <button type="submit">검색</button>
     </form>
 
@@ -49,6 +52,10 @@
 
     <c:if test="${empty recipe and not empty recipeName}">
         <p style="color:red;">'${recipeName}'에 해당하는 레시피가 없습니다.</p>
+        <p>웹에서 검색해보시겠습니까?</p>
+        <p>
+            <a href="${googleUrl}" target="_blank">🔗 '${recipeName}' 레시피 구글 검색하기</a>
+        </p>
     </c:if>
 </body>
 </html>

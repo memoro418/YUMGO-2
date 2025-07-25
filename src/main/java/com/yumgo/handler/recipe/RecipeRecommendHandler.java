@@ -1,5 +1,6 @@
 package com.yumgo.handler.recipe;
 
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,13 +30,17 @@ public class RecipeRecommendHandler implements CommandHandler {
 		} else if ("search".equals(type)) {
 			String recipeName = request.getParameter("recipeName");
 			Recipe recipe = dao.getRecipeByName(recipeName);
-			List<RecipeIngredient> ingredients = dao.getIngredientsByRecipeName(recipeName);
+
+			request.setAttribute("recipeName", recipeName); // 항상 담음(검색어 표시용)
 
 			if (recipe != null) {
+				List<RecipeIngredient> ingredients = dao.getIngredientsByRecipeName(recipeName);
 				request.setAttribute("recipe", recipe);
 				request.setAttribute("ingredients", ingredients);
 			} else {
-				request.setAttribute("recipeName", recipeName); // 검색 실패 메시지용
+				// DB에 없으면 구글 검색 URL 생성 후 전달
+				String googleUrl = "https://www.google.com/search?q=" + URLEncoder.encode(recipeName + " 레시피", "UTF-8");
+				request.setAttribute("googleUrl", googleUrl);
 			}
 		}
 
