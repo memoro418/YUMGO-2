@@ -32,7 +32,7 @@ public class MemberUpdatePostHandler implements CommandHandler {
 			dao.updateUser(user);
 
 			System.out.println("회원 정보가 수정되었습니다.");
-			return "redirect:/login/select.do";
+			return "redirect:/index.do";
 		} else {
 			throw new RuntimeException("수정하려면 로그인해야 합니다.");
 		}

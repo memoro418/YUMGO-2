@@ -35,7 +35,9 @@ public class LoginHandler implements CommandHandler {
 				// 로그인 성공
 				HttpSession session = request.getSession(true);
 				session.setAttribute("user", user); // 전체 객체 저장
+				session.setAttribute("user_id", user.getUser_id());
 				session.setAttribute("username", user.getUsername());
+				session.setAttribute("useremail", user.getEmail());
 
 				String originalURL = (String) session.getAttribute("originalURL");
 				session.removeAttribute("originalURL");

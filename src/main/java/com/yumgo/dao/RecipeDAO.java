@@ -86,4 +86,23 @@ public class RecipeDAO {
 		}
 	}
 
+	// 전체 레시피 조회
+	public List<Recipe> getAllRecipes() throws SQLException {
+		String sql = "SELECT NAME, SUMMARY, COOKING_TIME, CALORIE FROM RECIPE";
+		List<Recipe> recipes = new ArrayList<>();
+		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs.next()) {
+					Recipe r = new Recipe();
+					r.setName(rs.getString("NAME"));
+					r.setSummary(rs.getString("SUMMARY"));
+					r.setCookingTime(rs.getString("COOKING_TIME"));
+					r.setCalorie(rs.getString("CALORIE"));
+					recipes.add(r);
+				}
+			}
+		}
+		return recipes;
+	}
+
 }

@@ -52,6 +52,7 @@
     </style>
 </head>
 <body>
+	<a href="/member/deleteform.do">회원정보 삭제</a>
     <%-- <jsp:include page="/common/header.jsp" /> --%>
     <!-- Hero Section -->
     <section class="hero-section">
@@ -73,7 +74,16 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>
                     </c:if>
-                    
+                    <c:if test="${not empty sessionScope.username}">
+					    <div class="container mt-3 text-end">
+					        <div class="alert alert-success d-inline-block">
+					            <strong>${sessionScope.username}</strong>님 환영합니다!
+					            <a href="${pageContext.request.contextPath}/member/select.do" class="btn btn-sm btn-outline-primary ms-2">내 정보 보기</a>
+					            <a href="${pageContext.request.contextPath}/login/logout.do" class="btn btn-sm btn-outline-secondary ms-1">로그아웃</a>
+					            <a href="${pageContext.request.contextPath}/member/deleteform.do" class="btn btn-sm btn-outline-danger ms-1">회원탈퇴</a>
+					        </div>
+					    </div>
+					</c:if>
                     <!-- 로그인 상태에 따른 버튼 -->
                     <c:choose>
                         <c:when test="${not empty sessionScope.username}">

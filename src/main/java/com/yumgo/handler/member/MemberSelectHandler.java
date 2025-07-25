@@ -19,10 +19,10 @@ public class MemberSelectHandler implements CommandHandler {
 			User user = dao.getUserByUsername(username);
 			request.setAttribute("user", user);
 			request.setAttribute("action", "update");
-			return "member/memberform.jsp";
+			return "login/memberform.jsp";
 		} else {
 			request.setAttribute("message", "로그인하지 않은 사용자입니다.");
-			return "member/loginform.jsp";
+			return "login/loginform.jsp";
 		}
 	}
 

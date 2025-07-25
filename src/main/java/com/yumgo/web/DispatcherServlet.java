@@ -54,6 +54,8 @@ public class DispatcherServlet extends HttpServlet {
 				System.out.println("핸들러 등록: " + uri + " -> " + handlerClassName);
 
 			} catch (Exception e) {
+				System.err.println("❌ 핸들러 로딩 실패: " + handlerClassName);
+				e.printStackTrace();
 				throw new ServletException("핸들러 로드 실패: " + handlerClassName, e);
 			}
 		}
