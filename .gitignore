@@ -1,8 +1,6 @@
 
 /target/
 /bin/
-/.settings/
-/.classpath
 /.project
 *.log
 *.tmp
@@ -12,10 +10,6 @@
 build/
 bin/
 *.class
-# ========== STS / Eclipse ==========
-.classpath
-.project
-
 
 # ========== Build Folders ==========
 bin/
@@ -29,3 +23,5 @@ Thumbs.db
 
 # ========== Logs ==========
 *.log
+
+
