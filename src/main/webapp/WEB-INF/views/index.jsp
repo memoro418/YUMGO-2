@@ -213,26 +213,51 @@
                     </div>
                 </div>
 
-                <div class="tile-row">
-                    <div class="tile">
-                        <img
-                            src="${pageContext.request.contextPath}/resources/img/search-food.png"
-                            alt="음식 정보 검색"
-                        />
-                        <span>음식 정보 검색</span>
-                    </div>
-                    <div class="tile">
-                        <img src="${pageContext.request.contextPath}/resources/img/recipe.png" alt="레시피 추천" />
-                        <span>레시피 추천</span>
-                    </div>
-                    <div class="tile">
-                        <img
-                            src="${pageContext.request.contextPath}/resources/img/remove-expired.png"
-                            alt="유통기한 지난 음식 제거"
-                        />
-                        <span>유통기한 지난<br />음식 제거</span>
-                    </div>
-                </div>
+                <!-- 기존 이미지 + 텍스트 부분 대신 버튼으로 교체 -->
+				<div class="tile-row">
+				    <div class="tile">
+				        <img
+				            src="${pageContext.request.contextPath}/resources/img/search-food.png"
+				            alt="음식 정보 검색"
+				        />
+				        <span>음식 정보 검색</span>
+				    </div>
+				
+				    <div class="tile">
+				        <!-- 버튼 추가 -->
+				        <form action="${pageContext.request.contextPath}/recipe/search_recommend.do" method="get" style="margin:0;">
+				            <button type="submit"
+				                style="
+				                    background: rgba(102, 205, 170, 0.1);
+				                    border: 1px solid #168b85;
+				                    border-radius: 10px;
+				                    padding: 0.5rem;
+				                    width: 100%;
+				                    display: flex;
+				                    flex-direction: column;
+				                    align-items: center;
+				                    text-align: center;
+				                    cursor: pointer;
+				                ">
+				                <img
+				                    src="${pageContext.request.contextPath}/resources/img/recipe.png"
+				                    alt="레시피 추천"
+				                    style="width: 40px; height: 40px; margin-bottom: 0.5rem;"
+				                />
+				                <span style="font-weight: 700; font-size: 0.875rem; color: #0d6564;">레시피 추천</span>
+				            </button>
+				        </form>
+				    </div>
+				
+				    <div class="tile">
+				        <img
+				            src="${pageContext.request.contextPath}/resources/img/remove-expired.png"
+				            alt="유통기한 지난 음식 제거"
+				        />
+				        <span>유통기한 지난<br />음식 제거</span>
+				    </div>
+				</div>
+
             </div>
 
             <!-- 2-2) 냉장고 아랫칸 카드 -->
