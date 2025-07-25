@@ -1,8 +1,6 @@
 
 /target/
 /bin/
-/.settings/
-/.classpath
 /.project
 *.log
 *.tmp
@@ -13,10 +11,7 @@ build/
 bin/
 *.class
 # ========== STS / Eclipse ==========
-.classpath
 .project
-
-
 # ========== Build Folders ==========
 bin/
 build/
