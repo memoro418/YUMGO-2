@@ -15,7 +15,7 @@ bin/
 # ========== STS / Eclipse ==========
 .classpath
 .project
-.settings/
+
 
 # ========== Build Folders ==========
 bin/
@@ -29,19 +29,3 @@ Thumbs.db
 
 # ========== Logs ==========
 *.log
-
-# ========== Maven ==========
-.mvn/
-!/.mvn/wrapper/maven-wrapper.jar
-target/
-dependency-reduced-pom.xml
-
-# ========== IDE 별 ==========
-# IntelliJ (혹시 병행 사용시 대비)
-.idea/
-*.iml
-
-# ========== 기타 ==========
-*.swp
-*.tmp
-

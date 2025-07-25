@@ -1,155 +1,139 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>로그인 - YUMGO</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>로그인 – YUMGO</title>
+    <!-- Pretendard 웹폰트 -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+    />
     <style>
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-        }
+        /* 로그인 폼 스타일 간단히 적용 */
         .login-container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
+            max-width: 360px;
+            width: 90%;
+            margin: 6vh auto 0;
+            background: #fff;
+            padding: 2rem 1rem;
+            box-sizing: border-box;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            font-family: "Pretendard", sans-serif;
         }
-        .login-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 2rem;
-            text-align: center;
+        .login-logo {
+            display: block;
+            margin: 0 auto 2rem;
+            width: 80%;
+            height: auto;
         }
-        .login-form {
-            padding: 2rem;
+        .alert {
+            margin-bottom: 1rem;
+            padding: 0.75rem 1rem;
+            border-radius: 0.25rem;
+            font-size: 0.9rem;
         }
-        .form-control {
+        .alert-warning {
+            background: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+        }
+        .alert-success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        form label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #168b85;
+        }
+        form input[type="text"],
+        form input[type="password"] {
+            width: 100%;
+            padding: 0.5rem;
+            font-size: 1.125rem;
             border: none;
-            border-bottom: 2px solid #e9ecef;
-            border-radius: 0;
-            padding: 1rem 0;
-            background: transparent;
+            border-bottom: 2px solid #168b85;
+            margin-bottom: 2rem;
+            outline: none;
+            box-sizing: border-box;
         }
-        .form-control:focus {
-            border-bottom-color: #667eea;
-            box-shadow: none;
-            background: transparent;
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 80%;
+            margin: 0 auto;
         }
         .btn-login {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #76d7c4;
             border: none;
-            padding: 1rem 2rem;
-            border-radius: 50px;
+            padding: 0.75rem 0;
             font-weight: 600;
-            letter-spacing: 1px;
+            font-size: 1rem;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
         }
-        .btn-login:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        .btn-register {
+            background: #aaa;
+            color: white;
+            text-align: center;
+            display: block;
+            padding: 0.75rem 0;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6 col-lg-5">
-                <div class="login-container">
-                    <!-- 로그인 헤더 -->
-                    <div class="login-header">
-                        <h1><i class="fas fa-refrigerator me-2"></i>YUMGO</h1>
-                        <p class="mb-0">냉장고 관리 시스템</p>
-                    </div>
+    <div class="login-container">
 
-                    <!-- 로그인 폼 -->
-                    <div class="login-form">
-                        <!-- 메시지 표시 -->
-                        <c:if test="${not empty message}">
-                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                <i class="fas fa-exclamation-triangle me-2"></i>${message}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                            </div>
-                        </c:if>
+        <!-- 동적 메시지 출력 -->
+        <c:if test="${not empty message}">
+            <div class="alert alert-warning">${message}</div>
+        </c:if>
+        <c:if test="${param.logout eq 'success'}">
+            <div class="alert alert-success">성공적으로 로그아웃되었습니다.</div>
+        </c:if>
 
-                        <c:if test="${param.logout eq 'success'}">
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <i class="fas fa-check-circle me-2"></i>성공적으로 로그아웃되었습니다.
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                            </div>
-                        </c:if>
+        <!-- 로그인 폼 -->
+        <form method="post" action="${pageContext.request.contextPath}/login/login.do">
+            <!-- 로고 -->
+            <img src="${pageContext.request.contextPath}/resources/img/fulllogo.png" alt="YUMGO Logo" class="login-logo" />
 
-                        <form method="post" action="${pageContext.request.contextPath}/login/login.do">
-                            <div class="mb-4">
-                                <label for="id" class="form-label">
-                                    <i class="fas fa-user me-2 text-primary"></i>아이디
-                                </label>
-                                <input type="text" 
-                                       class="form-control" 
-                                       id="id" 
-                                       name="id" 
-                                       value="${id}"
-                                       placeholder="아이디를 입력하세요"
-                                       required 
-                                       autofocus>
-                            </div>
+            <label for="id">아이디</label>
+            <input
+                type="text"
+                id="id"
+                name="id"
+                placeholder="아이디를 입력하세요"
+                value="${id}"
+                required
+                autofocus
+            />
 
-                            <div class="mb-4">
-                                <label for="password" class="form-label">
-                                    <i class="fas fa-lock me-2 text-primary"></i>비밀번호
-                                </label>
-                                <input type="password" 
-                                       class="form-control" 
-                                       id="password" 
-                                       name="password" 
-                                       placeholder="비밀번호를 입력하세요"
-                                       required>
-                            </div>
+            <label for="password">비밀번호</label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="비밀번호를 입력하세요"
+                required
+            />
 
-                            <div class="d-grid mb-4">
-                                <button type="submit" class="btn btn-primary btn-login">
-                                    <i class="fas fa-sign-in-alt me-2"></i>로그인
-                                </button>
-                            </div>
-                        </form>
-
-                        <!-- 회원가입 링크 -->
-                        <div class="text-center">
-                            <p class="text-muted">아직 계정이 없으신가요?</p>
-                            <a href="${pageContext.request.contextPath}/member/register.do" 
-                               class="btn btn-outline-primary">
-                                <i class="fas fa-user-plus me-2"></i>회원가입
-                            </a>
-                        </div>
-
-                        <!-- 도움말 -->
-                        <div class="mt-4 p-3 bg-light rounded">
-                            <h6><i class="fas fa-info-circle me-2 text-info"></i>로그인 방법</h6>
-                            <small class="text-muted">
-                                회원가입 시 등록한 <strong>아이디</strong>와 <strong>비밀번호</strong>를 입력하여 로그인하세요.
-                            </small>
-                        </div>
-                    </div>
-                </div>
+            <div class="btn-group">
+                <button type="submit" class="btn-login">로그인</button>
+                <a href="${pageContext.request.contextPath}/member/register.do" class="btn-register">회원가입</a>
             </div>
-        </div>
+        </form>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // 알림 메시지 자동 숨김
-        setTimeout(function () {
-            const alerts = document.querySelectorAll('.alert');
-            alerts.forEach(alert => {
-                const bsAlert = new bootstrap.Alert(alert);
-                bsAlert.close();
-            });
-        }, 5000);
-    </script>
 </body>
 </html>
