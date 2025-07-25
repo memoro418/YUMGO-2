@@ -22,8 +22,8 @@ import javax.servlet.http.HttpSession;
 public class SecurityFilter implements Filter {
 
 	// 로그인 없이 접근 가능한 URL 패턴들
-	private static final List<String> PUBLIC_URLS = Arrays.asList("/", "/index.do", "/login/loginform.do",
-			"/login/login.do", "/member/register.do", "/member/registerProcess.do");
+	private static final List<String> PUBLIC_URLS = Arrays.asList("/", "/login/loginform.do", "/login/login.do",
+			"/member/register.do", "/member/registerProcess.do");
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
