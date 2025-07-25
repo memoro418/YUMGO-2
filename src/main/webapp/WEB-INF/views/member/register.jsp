@@ -21,11 +21,9 @@
     body {
       margin: 0;
       min-height: 100vh;
-      padding: 2rem 0;
       display: flex;
       justify-content: center;
   	  align-items: flex-start; /* 키보드 뜨거나 컨텐츠 많아져도 위에서부터 쌓이게 */
-	  overflow-y: auto;
     }
 
     /* FORM 을 컨테이너 삼기 */
@@ -37,8 +35,7 @@
       box-sizing: border-box;
       box-shadow: 0 1px 2px rgba(16,24,40,0.05);
       border-radius: 8px;
-      max-height: calc(100vh - 4rem);
-	  overflow-y: auto;
+
     }
 
     /* 서버 메시지 */
