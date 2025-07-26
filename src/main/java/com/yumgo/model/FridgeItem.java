@@ -13,5 +13,7 @@ public class FridgeItem {
 	private Date insertedAt;
 	private String foodName;
 	private String username;
+	private String category; // 카테고리 추가
+	private String quantity; // 갯수 추가
 
 }
