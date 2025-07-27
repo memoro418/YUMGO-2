@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DataSource {
 	private static String driverClassName = "oracle.jdbc.OracleDriver"; //
-	String url = "jdbc:oracle:thin:@//172.30.1.55:1523/XEPDB1";
+	String url = "jdbc:oracle:thin:@//localhost:1523/XEPDB1";
 	String username = "new_board";
 	String password = "1234";
 
