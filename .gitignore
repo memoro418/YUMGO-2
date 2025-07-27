@@ -1,0 +1,27 @@
+
+/target/
+/bin/
+/.project
+*.log
+*.tmp
+*.swp
+*.iml
+*.DS_Store
+build/
+bin/
+*.class
+
+# ========== Build Folders ==========
+bin/
+build/
+target/
+out/
+
+# ========== OS 별 임시파일 ==========
+.DS_Store
+Thumbs.db
+
+# ========== Logs ==========
+*.log
+
+
