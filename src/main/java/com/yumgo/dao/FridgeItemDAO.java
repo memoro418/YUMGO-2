@@ -43,27 +43,33 @@ public class FridgeItemDAO {
 		}
 	}
 
+	
+	// 음식 등록
 	public int insertFridgeItemAuto(FridgeItem item) {
-		String sql = "INSERT INTO FRIDGE_ITEM (fridge_item_id, user_id, food_id, expiration_date, inserted_at, food_name, username) "
-				+ "VALUES (fridge_item_seq.NEXTVAL, ?, ?, ?, SYSDATE, ?, ?)";
-		try (Connection conn = ds.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+	    String sql = "INSERT INTO FRIDGE_ITEM " +
+	                 "(fridge_item_id, user_id, food_id, expiration_date, inserted_at, food_name, username, category, quantity) " +
+	                 "VALUES (fridge_item_seq.NEXTVAL, ?, ?, ?, SYSDATE, ?, ?, ?, ?)";
+	    try (Connection conn = ds.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
-			ps.setInt(1, item.getUserId());
-			if (item.getFoodId() == null) {
-				ps.setNull(2, java.sql.Types.INTEGER);
-			} else {
-				ps.setInt(2, item.getFoodId());
-			}
-			ps.setDate(3, item.getExpirationDate());
-			ps.setString(4, item.getFoodName());
-			ps.setString(5, item.getUsername());
+	        ps.setInt(1, item.getUserId());
+	        if (item.getFoodId() == null) {
+	            ps.setNull(2, java.sql.Types.INTEGER);
+	        } else {
+	            ps.setInt(2, item.getFoodId());
+	        }
+	        ps.setDate(3, item.getExpirationDate());
+	        ps.setString(4, item.getFoodName());
+	        ps.setString(5, item.getUsername());
+	        ps.setString(6, item.getCategory()); // 카테고리 추가
+	        ps.setString(7, item.getQuantity()); // 갯수 추가
 
-			return ps.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return 0;
-		}
+	        return ps.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return 0;
+	    }
 	}
+
 
 	// 현재 냉장고 음식 검색
 	public List<FridgeItem> findAll() {
@@ -79,6 +85,8 @@ public class FridgeItemDAO {
 				item.setUsername(rs.getString("USERNAME"));
 				item.setFoodName(rs.getString("food_name"));
 				item.setExpirationDate(rs.getDate("expiration_date"));
+			    item.setCategory(rs.getString("category")); // 추가
+	            item.setQuantity(rs.getString("quantity")); // 추가
 				itemList.add(item);
 			}
 		} catch (SQLException e) {
@@ -87,6 +95,33 @@ public class FridgeItemDAO {
 
 		return itemList;
 	}
+	
+	
+	// 카테고리별 음식 조회
+	public List<FridgeItem> findByCategory(String category) {
+	    String sql = "SELECT * FROM FRIDGE_ITEM WHERE CATEGORY = ?";
+	    List<FridgeItem> itemList = new ArrayList<>();
+
+	    try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+	        ps.setString(1, category);
+
+	        try (ResultSet rs = ps.executeQuery()) {
+	            while (rs.next()) {
+	                FridgeItem item = new FridgeItem();
+	                item.setUsername(rs.getString("USERNAME"));
+	                item.setFoodName(rs.getString("food_name"));
+	                item.setExpirationDate(rs.getDate("expiration_date"));
+	                item.setCategory(rs.getString("category"));
+	                item.setQuantity(rs.getString("quantity"));
+	                itemList.add(item);
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return itemList;
+	}
+
 
 	// 사용자 이름으로 냉장고 음식 조회
 	public List<FridgeItem> findByUsername(String username) {
@@ -103,6 +138,8 @@ public class FridgeItemDAO {
 					item.setUsername(rs.getString("USERNAME"));
 					item.setFoodName(rs.getString("food_name"));
 					item.setExpirationDate(rs.getDate("expiration_date"));
+				    item.setCategory(rs.getString("category"));
+		            item.setQuantity(rs.getString("quantity"));
 					itemList.add(item);
 				}
 			}
