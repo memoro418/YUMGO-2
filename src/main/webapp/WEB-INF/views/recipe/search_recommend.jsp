@@ -196,44 +196,48 @@
 
     <!-- 추천/검색 결과 카드 리스트 -->
     <c:if test="${not empty recipes}">
-      <div class="card-list">
-        <c:forEach var="r" items="${recipes}">
-          <a class="card"
-             href="${pageContext.request.contextPath}/recipe/detail.do?name=${r.name}">
-            <img src="${pageContext.request.contextPath}/resources/img/bibim.png"
-                 alt="${r.name}"/>
-            <div class="info">
-              <div class="meta">
-                <span class="time">${r.cookingTime}</span>
-                <span class="calorie">${r.calorie}</span>
-              </div>
-              <div class="title">${r.name}</div>
-              <p class="summary">${r.summary}</p>
-            </div>
-          </a>
-        </c:forEach>
-      </div>
-    </c:if>
+	  <div class="card-list">
+	    <c:forEach var="r" items="${recipes}">
+	      <a class="card"
+	         href="${pageContext.request.contextPath}/recipe/detail.do?name=${r.name}">
+	        <img src="${pageContext.request.contextPath}${r.imagePath}" alt="${r.name}"/>
+	        <div class="info">
+	          <div class="meta">
+	            <span class="time">${r.cookingTime}</span>
+	            <span class="calorie">${r.calorie}</span>
+	          </div>
+	          <div class="title">${r.name}</div>
+	          <p class="summary">${r.summary}</p>
+	        </div>
+	      </a>
+	    </c:forEach>
+	  </div>
+	</c:if>
+
 
     <!-- 레시피 상세(검색) 카드 -->
-    <c:if test="${not empty recipe}">
-      <div class="result-title">레시피 검색 결과</div>
-      <div class="card-list">
-        <a class="card"
-           href="${pageContext.request.contextPath}/recipe/detail.do?name=${recipe.name}">
-          <img src="${pageContext.request.contextPath}/resources/img/bibim.png"
-               alt="${recipe.name}"/>
-          <div class="info">
-            <div class="meta">
-              <span class="time">${recipe.cookingTime}</span>
-              <span class="calorie">${recipe.calorie}</span>
-            </div>
-            <div class="title">${recipe.name}</div>
-            <p class="summary">${recipe.summary}</p>
-          </div>
-        </a>
-      </div>
-    </c:if>
+	<c:if test="${not empty recipe}">
+	  <div class="result-title">레시피 검색 결과</div>
+	  <div class="card-list">
+	    <a class="card"
+	       href="${pageContext.request.contextPath}/recipe/detail.do?name=${recipe.name}">
+	       
+	      <!-- 🔻 이미지 경로를 recipe.imagePath에서 불러옴 -->
+	      <img src="${pageContext.request.contextPath}${recipe.imagePath}"
+	           alt="${recipe.name}"/>
+	           
+	      <div class="info">
+	        <div class="meta">
+	          <span class="time">${recipe.cookingTime}</span>
+	          <span class="calorie">${recipe.calorie}</span>
+	        </div>
+	        <div class="title">${recipe.name}</div>
+	        <p class="summary">${recipe.summary}</p>
+	      </div>
+	    </a>
+	  </div>
+	</c:if>
+
 
     <!-- 검색 결과 없음 -->
     <c:if test="${empty recipe and not empty recipeName}">

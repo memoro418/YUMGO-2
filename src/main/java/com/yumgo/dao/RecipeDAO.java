@@ -68,9 +68,13 @@ public class RecipeDAO {
 	}
 
 	public Recipe getRecipeByName(String recipeName) throws SQLException {
-		String sql = "SELECT NAME, SUMMARY, COOKING_TIME, CALORIE FROM RECIPE WHERE NAME = ?";
+		String sql = "SELECT NAME, SUMMARY, COOKING_TIME, CALORIE, "
+				+ "COOKING_STEP1, COOKING_STEP2, COOKING_STEP3, IMAGE_PATH " + "FROM RECIPE WHERE NAME = ?";
+
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
 			pstmt.setString(1, recipeName);
+
 			try (ResultSet rs = pstmt.executeQuery()) {
 				if (rs.next()) {
 					Recipe r = new Recipe();
@@ -78,6 +82,10 @@ public class RecipeDAO {
 					r.setSummary(rs.getString("SUMMARY"));
 					r.setCookingTime(rs.getString("COOKING_TIME"));
 					r.setCalorie(rs.getString("CALORIE"));
+					r.setCookingStep1(rs.getString("COOKING_STEP1"));
+					r.setCookingStep2(rs.getString("COOKING_STEP2"));
+					r.setCookingStep3(rs.getString("COOKING_STEP3"));
+					r.setImagePath(rs.getString("IMAGE_PATH"));
 					return r;
 				} else {
 					return null;
