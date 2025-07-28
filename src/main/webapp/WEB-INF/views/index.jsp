@@ -234,7 +234,9 @@ body {
   <div class="header">
     <img class="logo" src="${pageContext.request.contextPath}/resources/img/logo.png" alt="냉장고 아이콘" />
     <img class="logotype" src="${pageContext.request.contextPath}/resources/img/Yumgo.png" alt="Yumgo 로고" />
-    <img class="user" src="${pageContext.request.contextPath}/resources/img/user.png" alt="사용자 아이콘" />
+    <a href="${pageContext.request.contextPath}/member/mypage.do">
+  	<img class="user" src="${pageContext.request.contextPath}/resources/img/user.png" alt="사용자 아이콘">
+	</a>
   </div>
 
   <!-- ✅ 냉장고 윗칸 -->
@@ -286,25 +288,7 @@ body {
     </div>
   </form>
 </div>
-
-				<div class="tile">
-					<!-- 버튼 추가 -->
-					<form action="${pageContext.request.contextPath}/fridge/manage.do"
-						method="get" style="margin: 0;">
-						<button type="submit"
-							style="background: rgba(102, 205, 170, 0.1); border: 1px solid #168b85; border-radius: 10px; padding: 0.5rem; width: 100%; display: flex; flex-direction: column; align-items: center; text-align: center; cursor: pointer;">
-							<img
-								src="${pageContext.request.contextPath}/resources/img/remove-expired.png"
-								alt="유통기한 지난 음식 제거" /> <span>유통기한 지난<br />음식 제거
-							</span>
-						</button>
-					</form>
-				</div>
-			</div>
-
-		</div>
-
-		<!-- 2-2) 냉장고 아랫칸 카드 -->
+	<!-- 2-2) 냉장고 아랫칸 카드 -->
 		<div class="card lower">
 			<h2>냉장고 아랫칸</h2>
 			<div class="stats-row">
@@ -325,5 +309,6 @@ body {
 			</div>
 		</div>
 	</div>
+
 </body>
 </html>
