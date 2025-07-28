@@ -10,14 +10,12 @@ public class MemberDeleteGetHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		HttpSession session = request.getSession();
-		String user_id = (String) session.getAttribute("user_id");
-		if (user_id != null) {
+		   HttpSession session = request.getSession();
+	        String id = (String) session.getAttribute("id");  // 로그인된 사용자 id
+		if (id != null) {
 			return "login/passwordform.jsp";
-
 		} else {
 			return "member/loginform.jsp";
 		}
 	}
-
 }

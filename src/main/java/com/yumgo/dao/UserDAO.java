@@ -204,4 +204,22 @@ public class UserDAO {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	/**
+	 * 비밀번호 조회 (userId로 사용자 삭제)
+	 */
+	public String getPasswordByUserId(int userId) {
+	    String sql = "SELECT password FROM USERS WHERE user_id = ?";
+	    try (Connection conn = dataSource.getConnection();
+	         PreparedStatement ps = conn.prepareStatement(sql)) {
+	        ps.setInt(1, userId);
+	        ResultSet rs = ps.executeQuery();
+	        if (rs.next()) {
+	            return rs.getString("password");
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return null;
+	}
 }
