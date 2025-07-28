@@ -1,26 +1,147 @@
-<%@ page contentType="text/html;charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-<title>마이페이지</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>마이페이지 – YUMGO</title>
+
+  <!-- Pretendard 웹폰트 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+
+  <style>
+    :root {
+      --primary-color: #168B85;
+      --border-default: #F1F1F1;
+      --bg-page: #F2F5FB;
+      --danger-color: #FF6B6B;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      background: #ffffff;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 360px;
+      padding: 4vh 5vw;
+      box-sizing: border-box;
+    }
+
+    /* ✅ 헤더 */
+    .header {
+      display: flex;
+      align-items: center;
+      font-weight: 700;
+      font-size: 20px;
+      color: #333;
+      margin-bottom: 3vh;
+    }
+
+    .header img {
+      width: 24px;
+      height: 24px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    /* ✅ 입력 그룹 (회원정보) */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 4vh;
+    }
+
+    .form-group label {
+      font-family: "Pretendard", sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 20px;
+      color: #168B85;
+    }
+
+	.form-group input {
+	  font-family: "Pretendard", sans-serif;
+	  font-weight: 600;
+	  font-size: 20px;
+	  border: none;
+	  border-bottom: 1.5px solid #168B85;   /* ✅ 여기 색상 변경 */
+	  padding: 0.5rem 0;
+	  background: transparent;
+	  color: #333333;
+	}
+
+    /* ✅ readonly 스타일 */
+    .form-group input[readonly] {
+      color: #555;
+      background: transparent;
+    }
+
+    /* ✅ 회원탈퇴 버튼 */
+    .btn-delete {
+      display: block;
+      width: 200px;
+      height: 40px;
+      margin: 6vh auto 0;
+      font-family: "Pretendard", sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      text-align: center;
+      background: var(--danger-color);
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 1px 2px rgba(16,24,40,0.05);
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn-delete:hover {
+      opacity: 0.9;
+    }
+  </style>
 </head>
+
 <body>
-	<h2>마이페이지</h2>
-	<p>
-		<strong>이름:</strong> ${user.username}
-	</p>
-	<p>
-		<strong>아이디:</strong> ${user.id}
-	</p>
+  <div class="container">
 
-	<p>
-		<strong>비밀번호:</strong> ${user.password}
-	</p>
-	<p>
-		<strong>이메일:</strong> ${user.email}
-	</p>
+    <!-- ✅ 헤더 -->
+    <div class="header">
+      <img src="${pageContext.request.contextPath}/resources/img/arrow-left.png" onclick="history.back()">
+    </div>
 
-	<a href="${pageContext.request.contextPath}/index.do">홈으로 돌아가기</a>
-	<a href="${pageContext.request.contextPath}/member/deleteform.do">삭제하기(임시)</a>
+    <!-- ✅ 회원 정보 출력 -->
+    <div class="form-group">
+      <label for="username">이름</label>
+      <input type="text" id="username" value="${user.username}" readonly>
+    </div>
+
+    <div class="form-group">
+      <label for="id">아이디</label>
+      <input type="text" id="id" value="${user.id}" readonly>
+    </div>
+
+    <div class="form-group">
+      <label for="password">비밀번호</label>
+      <input type="password" id="password" value="${user.password}" readonly>
+    </div>
+
+    <div class="form-group">
+      <label for="email">이메일</label>
+      <input type="email" id="email" value="${user.email}" readonly>
+    </div>
+
+    <!-- ✅ 회원탈퇴 버튼 -->
+    <form action="${pageContext.request.contextPath}/member/deleteform.do" method="get">
+      <button type="submit" class="btn-delete">회원탈퇴</button>
+    </form>
+
+  </div>
 </body>
 </html>
