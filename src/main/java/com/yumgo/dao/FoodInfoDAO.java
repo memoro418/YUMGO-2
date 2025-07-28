@@ -17,7 +17,7 @@ public class FoodInfoDAO {
 
 	public List<FoodInfo> searchByFoodName(String name) {
 		List<FoodInfo> list = new ArrayList<>();
-		String sql = "SELECT food_id, prdlst_nm, pog_daycnt, prdlst_dcnm, bssh_nm FROM FOOD_INFO WHERE prdlst_nm LIKE ?";
+		String sql = "SELECT food_id, prdlst_nm, pog_daycnt, prdlst_dcnm, bssh_nm, IMAGE_PATH FROM FOOD_INFO WHERE prdlst_nm LIKE ?";
 
 		DataSource ds = new DataSource();
 
@@ -31,6 +31,7 @@ public class FoodInfoDAO {
 					food.setPrdlstNm(rs.getString("prdlst_nm"));
 					food.setPogDaycnt(rs.getString("pog_daycnt"));
 					food.setPrdlstDcnm(rs.getString("prdlst_dcnm"));
+					food.setImagePath(rs.getString("IMAGE_PATH"));
 //					food.setBsshNm(rs.getString("bssh_nm"));
 					list.add(food);
 				}
