@@ -134,9 +134,9 @@
     <img src="${pageContext.request.contextPath}/resources/img/arrow-left.png"
          class="icon" alt="뒤로가기" onclick="history.back()"/>
     <div class="header-title">레시피 검색</div>
-    <img src="${pageContext.request.contextPath}/resources/img/user.png"
-         class="icon" alt="마이페이지"
-         onclick="location.href='${pageContext.request.contextPath}/mypage.do'"/>
+    <a href="${pageContext.request.contextPath}/member/mypage.do">
+  	<img class="user" src="${pageContext.request.contextPath}/resources/img/user.png" alt="사용자 아이콘">
+	</a>
   </div>
 
   <div class="container">

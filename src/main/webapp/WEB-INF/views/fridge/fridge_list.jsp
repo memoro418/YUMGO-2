@@ -169,7 +169,9 @@ body {
 <div class="header">
     <img src="${pageContext.request.contextPath}/resources/img/arrow-left.png" onclick="history.back()">
     <h2 style="font-weight:700; font-size:20px; color:#0D6564;">공유 냉장고</h2>
-    <img src="${pageContext.request.contextPath}/resources/img/user.png" onclick="location.href='${pageContext.request.contextPath}/mypage.do'">
+    <a href="${pageContext.request.contextPath}/member/mypage.do">
+  	<img class="user" src="${pageContext.request.contextPath}/resources/img/user.png" alt="사용자 아이콘">
+	</a>
 </div>
 
 <!-- ✅ 카테고리 가로 스크롤바 -->
