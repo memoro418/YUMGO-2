@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -304,15 +305,17 @@ body {
 			<h2>냉장고 아랫칸</h2>
 			<div class="stats-row">
 				<div class="stat">
-					<h3>오늘 요약</h3>
+					<h3>내꺼 요약</h3>
 					<p>
-						유통기한 임박 <strong>2건</strong><br /> 오늘 보관된 식품 <strong>5개</strong>
+						유통기한 임박:  <strong>${expiringCount}건</strong><br />
+        					보관힌 식품:  <strong>${todayStoredCount}개</strong>
 					</p>
 				</div>
 				<div class="stat">
 					<h3>냉장고 현황</h3>
 					<p>
-						총 식품수 <strong>20개</strong><br /> 오늘 보관된 식품 <strong>5개</strong>
+						총 식품수 <strong>${StoredTotal}개</strong><br />
+        					오늘 등록 식품 수: <strong>${todayStoredCount}개</strong>
 					</p>
 				</div>
 			</div>
