@@ -9,4 +9,5 @@ public class FoodInfo {
 	private String pogDaycnt;
 	private String prdlstDcnm;
 	private String bsshNm;
+	private String imagePath;
 }
