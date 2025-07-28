@@ -288,30 +288,27 @@ body {
     </div>
   </form>
 </div>
+	<!-- 2-2) 냉장고 아랫칸 카드 -->
+		<div class="card lower">
+			<h2>냉장고 아랫칸</h2>
+			<div class="stats-row">
+				<div class="stat">
+					<h3>내꺼 요약</h3>
+					<p>
+						유통기한 임박:  <strong>${expiringCount}건</strong><br />
+        					보관힌 식품:  <strong>${todayStoredCount}개</strong>
+					</p>
+				</div>
+				<div class="stat">
+					<h3>냉장고 현황</h3>
+					<p>
+						총 식품수 <strong>${StoredTotal}개</strong><br />
+        					오늘 등록 식품 수: <strong>${todayStoredCount}개</strong>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
 
-  <!-- ✅ 냉장고 아랫칸 -->
-  <div class="card lower">
-    <div class="handle-top"></div>
-	<h2 style="font-size:20px;">
-      <img src="${pageContext.request.contextPath}/resources/img/fridge-2.png" style="width:30px; height:30px;">
-      냉장고 아랫칸
-    </h2>
-
-    <div class="stats-row">
-      <div class="stat">
-        <h3>내꺼 요약</h3>
-        <p>유통기한 임박:  <strong>${expiringCount}건</strong><br />
-        					보관힌 식품:  <strong>${todayStoredCount}개</strong></p>
-      </div>
-      <div class="stat">
-        <h3>냉장고 현황</h3>
-        <p>총 식품수 <strong>${StoredTotal}개</strong><br />
-        					오늘 등록 식품 수: <strong>${todayStoredCount}개</strong></p>
-      </div>
-    </div>
-  </div>
-
-</div>
-				
 </body>
 </html>
