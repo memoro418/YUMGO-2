@@ -31,8 +31,8 @@ public class FoodInfoDAO {
 					food.setPrdlstNm(rs.getString("prdlst_nm"));
 					food.setPogDaycnt(rs.getString("pog_daycnt"));
 					food.setPrdlstDcnm(rs.getString("prdlst_dcnm"));
-					food.setBsshNm(rs.getString("bssh_nm"));
 					food.setImagePath(rs.getString("IMAGE_PATH"));
+//					food.setBsshNm(rs.getString("bssh_nm"));
 					list.add(food);
 				}
 			}
