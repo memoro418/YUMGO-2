@@ -245,34 +245,46 @@ body {
     </div>
     <span class="sub">같이 쓰는 냉장고입니다.</span>
 
-    <!-- 첫 번째 줄 -->
-    <div class="tile-row big">
-      <div class="tile big-tile">
-        <img src="${pageContext.request.contextPath}/resources/img/fridge-open.png" alt="냉장고 열기">
-        <span>냉장고 열기</span>
-      </div>
-      <div class="tile big-tile">
-        <img src="${pageContext.request.contextPath}/resources/img/food-add.png" alt="음식 넣기">
-        <span>음식 넣기</span>
-      </div>
+<!-- 첫 번째 줄 -->
+<div class="tile-row big">
+  <form action="${pageContext.request.contextPath}/fridge/list.do" method="get" style="margin: 0;">
+    <div class="tile big-tile" onclick="this.closest('form').submit()" style="cursor:pointer;">
+      <img src="${pageContext.request.contextPath}/resources/img/fridge-open.png" alt="냉장고 열기">
+      <span>냉장고 열기</span>
     </div>
+  </form>
+
+  <form action="${pageContext.request.contextPath}/fridge/add.do" method="get" style="margin: 0;">
+    <div class="tile big-tile" onclick="this.closest('form').submit()" style="cursor:pointer;">
+      <img src="${pageContext.request.contextPath}/resources/img/food-add.png" alt="음식 넣기">
+      <span>음식 넣기</span>
+    </div>
+  </form>
+</div>
 
     <!-- 두 번째 줄 -->
-    <div class="tile-row small">
-      <div class="tile small-tile">
-        <img src="${pageContext.request.contextPath}/resources/img/search-food.png" alt="음식 정보 검색">
-        <span>음식 정보 검색</span>
-      </div>
-      <div class="tile small-tile">
-        <img src="${pageContext.request.contextPath}/resources/img/recipe.png" alt="레시피 추천">
-        <span>레시피 추천</span>
-      </div>
-      <div class="tile small-tile">
-        <img src="${pageContext.request.contextPath}/resources/img/remove-expired.png" alt="유통기한 지난 음식 제거">
-        <span>유통기한 지난<br>음식 제거</span>
-      </div>
+<div class="tile-row small">
+  <form action="${pageContext.request.contextPath}/ingredient/search.do" method="get" style="margin: 0;">
+    <div class="tile small-tile" onclick="this.closest('form').submit()" style="cursor:pointer;">
+      <img src="${pageContext.request.contextPath}/resources/img/search-food.png" alt="음식 정보 검색">
+      <span>음식 정보 검색</span>
     </div>
-  </div>
+  </form>
+
+  <form action="${pageContext.request.contextPath}/recipe/search_recommend.do" method="get" style="margin: 0;">
+    <div class="tile small-tile" onclick="this.closest('form').submit()" style="cursor:pointer;">
+      <img src="${pageContext.request.contextPath}/resources/img/recipe.png" alt="레시피 추천">
+      <span>레시피 추천</span>
+    </div>
+  </form>
+
+  <form action="${pageContext.request.contextPath}/fridge/manage.do" method="get" style="margin: 0;">
+    <div class="tile small-tile" onclick="this.closest('form').submit()" style="cursor:pointer;">
+      <img src="${pageContext.request.contextPath}/resources/img/remove-expired.png" alt="유통기한 지난 음식 제거">
+      <span>유통기한 지난<br>음식 제거</span>
+    </div>
+  </form>
+</div>
 
   <!-- ✅ 냉장고 아랫칸 -->
   <div class="card lower">
