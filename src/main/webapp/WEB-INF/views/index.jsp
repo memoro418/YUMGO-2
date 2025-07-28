@@ -234,7 +234,9 @@ body {
   <div class="header">
     <img class="logo" src="${pageContext.request.contextPath}/resources/img/logo.png" alt="냉장고 아이콘" />
     <img class="logotype" src="${pageContext.request.contextPath}/resources/img/Yumgo.png" alt="Yumgo 로고" />
-    <img class="user" src="${pageContext.request.contextPath}/resources/img/user.png" alt="사용자 아이콘" />
+    <a href="${pageContext.request.contextPath}/member/mypage.do">
+  	<img class="user" src="${pageContext.request.contextPath}/resources/img/user.png" alt="사용자 아이콘">
+	</a>
   </div>
 
   <!-- ✅ 냉장고 윗칸 -->
