@@ -287,43 +287,29 @@ body {
   </form>
 </div>
 
-				<div class="tile">
-					<!-- 버튼 추가 -->
-					<form action="${pageContext.request.contextPath}/fridge/manage.do"
-						method="get" style="margin: 0;">
-						<button type="submit"
-							style="background: rgba(102, 205, 170, 0.1); border: 1px solid #168b85; border-radius: 10px; padding: 0.5rem; width: 100%; display: flex; flex-direction: column; align-items: center; text-align: center; cursor: pointer;">
-							<img
-								src="${pageContext.request.contextPath}/resources/img/remove-expired.png"
-								alt="유통기한 지난 음식 제거" /> <span>유통기한 지난<br />음식 제거
-							</span>
-						</button>
-					</form>
-				</div>
-			</div>
+  <!-- ✅ 냉장고 아랫칸 -->
+  <div class="card lower">
+    <div class="handle-top"></div>
+	<h2 style="font-size:20px;">
+      <img src="${pageContext.request.contextPath}/resources/img/fridge-2.png" style="width:30px; height:30px;">
+      냉장고 아랫칸
+    </h2>
 
-		</div>
+    <div class="stats-row">
+      <div class="stat">
+        <h3>내꺼 요약</h3>
+        <p>유통기한 임박:  <strong>${expiringCount}건</strong><br />
+        					보관힌 식품:  <strong>${todayStoredCount}개</strong></p>
+      </div>
+      <div class="stat">
+        <h3>냉장고 현황</h3>
+        <p>총 식품수 <strong>${StoredTotal}개</strong><br />
+        					오늘 등록 식품 수: <strong>${todayStoredCount}개</strong></p>
+      </div>
+    </div>
+  </div>
 
-		<!-- 2-2) 냉장고 아랫칸 카드 -->
-		<div class="card lower">
-			<h2>냉장고 아랫칸</h2>
-			<div class="stats-row">
-				<div class="stat">
-					<h3>내꺼 요약</h3>
-					<p>
-						유통기한 임박:  <strong>${expiringCount}건</strong><br />
-        					보관힌 식품:  <strong>${todayStoredCount}개</strong>
-					</p>
-				</div>
-				<div class="stat">
-					<h3>냉장고 현황</h3>
-					<p>
-						총 식품수 <strong>${StoredTotal}개</strong><br />
-        					오늘 등록 식품 수: <strong>${todayStoredCount}개</strong>
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
+</div>
+				
 </body>
 </html>

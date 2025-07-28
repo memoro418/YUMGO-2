@@ -111,7 +111,9 @@
 <div class="container">
 
     <!-- ✅ 상단 이미지 -->
-    <div class="top-image"></div>
+    <div class="top-image"
+     style="background: url('${pageContext.request.contextPath}${recipe.imagePath}') center/cover no-repeat;">
+	</div>
 
     <!-- ✅ 제목 & 요약 -->
     <div class="title-wrap">
@@ -140,11 +142,17 @@
 
         <!-- ✅ 조리법 (임시로 하드코딩) -->
         <div class="recipe-step-title">조리법</div>
-        <ol class="recipe-steps">
-            <li>돼지고기와 김치를 함께 볶아 깊은 맛을 냅니다.</li>
-            <li>물과 양념을 넣고 중불에서 푹 끓입니다.</li>
-            <li>두부와 대파를 넣어 마무리합니다.</li>
-        </ol>
+		<ol class="recipe-steps">
+		    <c:if test="${not empty recipe.cookingStep1}">
+		        <li>${recipe.cookingStep1}</li>
+		    </c:if>
+		    <c:if test="${not empty recipe.cookingStep2}">
+		        <li>${recipe.cookingStep2}</li>
+		    </c:if>
+		    <c:if test="${not empty recipe.cookingStep3}">
+		        <li>${recipe.cookingStep3}</li>
+		    </c:if>
+		</ol>
 
         <!-- ✅ 재료 -->
         <div class="ingredient-title">재료</div>
