@@ -11,23 +11,26 @@ public class MemberDeletePostHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		UserDAO dao = new UserDAO();
 		HttpSession session = request.getSession();
-		String user_id = (String) session.getAttribute("user_id");
-		if (user_id != null) {
+		Integer userId = (Integer) session.getAttribute("user_id"); // 세션에서 user_id 가져오기
+
+		if (userId != null) {
 			String password = request.getParameter("password");
-			String realpw = dao.getPassword("user_id");
-			if (realpw.equals(password)) {
-				int userid = Integer.valueOf(user_id);
-				dao.deleteUser(userid);
-				session.invalidate();
+			UserDAO dao = new UserDAO();
+
+			String realPassword = dao.getPasswordByUserId(userId); // userId에 해당하는 비밀번호 조회
+
+			if (realPassword != null && realPassword.equals(password)) {
+				dao.deleteUser(userId);      // 사용자 삭제
+				session.invalidate();       // 세션 만료
 				return "redirect:/";
 			} else {
-				throw new RuntimeException("비밀번호가 다릅니다");
+				request.setAttribute("error", "비밀번호가 일치하지 않습니다.");
+				return "login/passwordform.jsp"; 
 			}
-		} else {
-			throw new RuntimeException("삭제하려면 로그인해야합니다");
+		}else {
+			return "redirect:/";
 		}
 	}
-
 }
+

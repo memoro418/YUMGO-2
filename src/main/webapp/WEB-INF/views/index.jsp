@@ -254,6 +254,7 @@ body {
     </div>
   </form>
 
+
   <form action="${pageContext.request.contextPath}/fridge/add.do" method="get" style="margin: 0;">
     <div class="tile big-tile" onclick="this.closest('form').submit()" style="cursor:pointer;">
       <img src="${pageContext.request.contextPath}/resources/img/food-add.png" alt="음식 넣기">
@@ -307,5 +308,6 @@ body {
   </div>
 
 </div>
+				
 </body>
 </html>
