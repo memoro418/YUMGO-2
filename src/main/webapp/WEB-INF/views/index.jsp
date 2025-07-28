@@ -296,7 +296,7 @@ body {
 					<h3>내꺼 요약</h3>
 					<p>
 						유통기한 임박:  <strong>${expiringCount}건</strong><br />
-        					보관힌 식품:  <strong>${todayStoredCount}개</strong>
+        					보관힌 식품:  <strong>${totalCount}개</strong>
 					</p>
 				</div>
 				<div class="stat">
