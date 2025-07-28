@@ -1,4 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<fmt:setBundle basename="messages_fridge_add" />
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -152,96 +157,100 @@
 </head>
 <body>
 
+<body>
+
 <!-- ✅ 헤더 -->
 <div class="header">
-    <img src="${pageContext.request.contextPath}/resources/img/arrow-left.png" onclick="history.back()">
-    <h1>냉장고에 음식보관</h1>
-    <img src="${pageContext.request.contextPath}/resources/img/user.png">
+  <img src="${pageContext.request.contextPath}/resources/img/arrow-left.png" onclick="history.back()">
+  <h1><fmt:message key="fridge.add.title"/></h1>
+  <img src="${pageContext.request.contextPath}/resources/img/user.png">
 </div>
 
 <!-- ✅ 메인 -->
 <div class="container">
 <form method="post" action="${pageContext.request.contextPath}/fridge/addProcess.do" onsubmit="return validateCategory();">
-    <input type="hidden" name="id" value="${sessionScope.id}">
-    <input type="hidden" id="category" name="category">
+  <input type="hidden" name="id" value="${sessionScope.id}">
+  <input type="hidden" id="category" name="category">
+  <input type="hidden" id="msg_category_required" value="<fmt:message key='fridge.add.alert.category' />" />
 
-    <!-- ✅ 음식 정보 박스 -->
-    <div class="white-box">
-        <h2>음식 정보</h2>
-        <div class="info-row">
-            <div class="info-label">음식 이름</div>
-            <div class="info-value">
-                <input type="text" name="foodName" placeholder="음식 이름 입력" required>
-            </div>
-        </div>
-        <div class="info-row">
-            <div class="info-label">보관 갯수</div>
-            <div class="info-value">
-                <input type="text" name="quantity" placeholder="수량" required>
-            </div>
-        </div>
-        <div class="info-row">
-            <div class="info-label">보관하는 사람</div>
-            <div class="info-value">${sessionScope.username}</div>
-        </div>
-        <div class="info-row">
-            <div class="info-label">유통기한</div>
-            <div class="info-value">
-                <input type="date" name="expirationDate" required>
-            </div>
-        </div>
+  <!-- ✅ 음식 정보 박스 -->
+  <div class="white-box">
+    <h2><fmt:message key="fridge.add.section.info"/></h2>
+    <div class="info-row">
+      <div class="info-label"><fmt:message key="fridge.add.label.foodName"/></div>
+      <div class="info-value">
+        <input type="text" name="foodName" placeholder="<fmt:message key='fridge.add.label.foodName.placeholder' />" required>
+      </div>
     </div>
+    <div class="info-row">
+      <div class="info-label"><fmt:message key="fridge.add.label.quantity"/></div>
+      <div class="info-value">
+        <input type="text" name="quantity" placeholder="<fmt:message key='fridge.add.label.quantity.placeholder' />" required>
+      </div>
+    </div>
+    <div class="info-row">
+      <div class="info-label"><fmt:message key="fridge.add.label.owner"/></div>
+      <div class="info-value">${sessionScope.username}</div>
+    </div>
+    <div class="info-row">
+      <div class="info-label"><fmt:message key="fridge.add.label.expiration"/></div>
+      <div class="info-value">
+        <input type="date" name="expirationDate" required>
+      </div>
+    </div>
+  </div>
 
-    <!-- ✅ 음식 품목 박스 -->
-    <div class="white-box">
-        <h2>음식 품목</h2>
-        <div class="category-grid">
-            <div class="category-item" onclick="selectCategory(this,'채소')">
-                <img src="${pageContext.request.contextPath}/resources/img/vegetable.png">
-                <span>채소</span>
-            </div>
-            <div class="category-item" onclick="selectCategory(this,'디저트')">
-                <img src="${pageContext.request.contextPath}/resources/img/dessert.png">
-                <span>디저트</span>
-            </div>
-            <div class="category-item" onclick="selectCategory(this,'과일')">
-                <img src="${pageContext.request.contextPath}/resources/img/fruits.png">
-                <span>과일</span>
-            </div>
-            <div class="category-item" onclick="selectCategory(this,'음료')">
-                <img src="${pageContext.request.contextPath}/resources/img/drink.png">
-                <span>음료</span>
-            </div>
-            <div class="category-item" onclick="selectCategory(this,'반찬')">
-                <img src="${pageContext.request.contextPath}/resources/img/side-dish.png">
-                <span>반찬</span>
-            </div>
-            <div class="category-item" onclick="selectCategory(this,'유제품')">
-                <img src="${pageContext.request.contextPath}/resources/img/milk.png">
-                <span>유제품</span>
-            </div>
-            <div class="category-item" onclick="selectCategory(this,'냉동식품')">
-                <img src="${pageContext.request.contextPath}/resources/img/frozen.png">
-                <span>냉동식품</span>
-            </div>
-            <div class="category-item" onclick="selectCategory(this,'육류')">
-                <img src="${pageContext.request.contextPath}/resources/img/meat.png">
-                <span>육류</span>
-            </div>
-            <div class="category-item" onclick="selectCategory(this,'기타')">
-                <img src="${pageContext.request.contextPath}/resources/img/etc.png">
-                <span>기타</span>
-            </div>
-        </div>
+  <!-- ✅ 음식 품목 박스 -->
+  <div class="white-box">
+    <h2><fmt:message key="fridge.add.section.category"/></h2>
+    <div class="category-grid">
+      <div class="category-item" onclick="selectCategory(this,'<fmt:message key='fridge.add.category.vegetable'/>')">
+        <img src="${pageContext.request.contextPath}/resources/img/vegetable.png">
+        <span><fmt:message key="fridge.add.category.vegetable"/></span>
+      </div>
+      <div class="category-item" onclick="selectCategory(this,'<fmt:message key='fridge.add.category.dessert'/>')">
+        <img src="${pageContext.request.contextPath}/resources/img/dessert.png">
+        <span><fmt:message key="fridge.add.category.dessert"/></span>
+      </div>
+      <div class="category-item" onclick="selectCategory(this,'<fmt:message key='fridge.add.category.fruit'/>')">
+        <img src="${pageContext.request.contextPath}/resources/img/fruits.png">
+        <span><fmt:message key="fridge.add.category.fruit"/></span>
+      </div>
+      <div class="category-item" onclick="selectCategory(this,'<fmt:message key='fridge.add.category.drink'/>')">
+        <img src="${pageContext.request.contextPath}/resources/img/drink.png">
+        <span><fmt:message key="fridge.add.category.drink"/></span>
+      </div>
+      <div class="category-item" onclick="selectCategory(this,'<fmt:message key='fridge.add.category.side'/>')">
+        <img src="${pageContext.request.contextPath}/resources/img/side-dish.png">
+        <span><fmt:message key="fridge.add.category.side"/></span>
+      </div>
+      <div class="category-item" onclick="selectCategory(this,'<fmt:message key='fridge.add.category.dairy'/>')">
+        <img src="${pageContext.request.contextPath}/resources/img/milk.png">
+        <span><fmt:message key="fridge.add.category.dairy"/></span>
+      </div>
+      <div class="category-item" onclick="selectCategory(this,'<fmt:message key='fridge.add.category.frozen'/>')">
+        <img src="${pageContext.request.contextPath}/resources/img/frozen.png">
+        <span><fmt:message key="fridge.add.category.frozen"/></span>
+      </div>
+      <div class="category-item" onclick="selectCategory(this,'<fmt:message key='fridge.add.category.meat'/>')">
+        <img src="${pageContext.request.contextPath}/resources/img/meat.png">
+        <span><fmt:message key="fridge.add.category.meat"/></span>
+      </div>
+      <div class="category-item" onclick="selectCategory(this,'<fmt:message key='fridge.add.category.etc'/>')">
+        <img src="${pageContext.request.contextPath}/resources/img/etc.png">
+        <span><fmt:message key="fridge.add.category.etc"/></span>
+      </div>
     </div>
+  </div>
 
-    <!-- ✅ 등록 버튼 -->
-    <div class="btn-container">
-        <button type="submit" class="btn">등록</button>
-    </div>
+  <!-- ✅ 등록 버튼 -->
+  <div class="btn-container">
+    <button type="submit" class="btn"><fmt:message key="fridge.add.button.submit"/></button>
+  </div>
 </form>
 </div>
 
+<!-- ✅ JS -->
 <script>
 function selectCategory(element, category) {
     document.getElementById('category').value = category;
@@ -250,7 +259,7 @@ function selectCategory(element, category) {
 }
 function validateCategory() {
     if (!document.getElementById('category').value) {
-        alert('카테고리를 선택해주세요!');
+        alert(document.getElementById('msg_category_required').value);
         return false;
     }
     return true;

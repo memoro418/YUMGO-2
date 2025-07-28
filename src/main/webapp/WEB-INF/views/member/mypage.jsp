@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+ <fmt:setBundle basename="messages_mypage" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -118,28 +120,30 @@
 
     <!-- ✅ 회원 정보 출력 -->
     <div class="form-group">
-      <label for="username">이름</label>
+      <label for="username"><fmt:message key="mypage.label.username" /></label>
       <input type="text" id="username" value="${user.username}" readonly>
     </div>
 
     <div class="form-group">
-      <label for="id">아이디</label>
+      <label for="id"><fmt:message key="mypage.label.id" /></label>
       <input type="text" id="id" value="${user.id}" readonly>
     </div>
 
     <div class="form-group">
-      <label for="password">비밀번호</label>
+      <label for="password"><fmt:message key="mypage.label.password" /></label>
       <input type="password" id="password" value="${user.password}" readonly>
     </div>
 
     <div class="form-group">
-      <label for="email">이메일</label>
+      <label for="email"><fmt:message key="mypage.label.email" /></label>
       <input type="email" id="email" value="${user.email}" readonly>
     </div>
 
     <!-- ✅ 회원탈퇴 버튼 -->
     <form action="${pageContext.request.contextPath}/member/deleteform.do" method="get">
-      <button type="submit" class="btn-delete">회원탈퇴</button>
+      <button type="submit" class="btn-delete">
+        <fmt:message key="mypage.button.delete" />
+      </button>
     </form>
 
   </div>

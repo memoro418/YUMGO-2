@@ -1,5 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<fmt:setBundle basename="messages_ingredient_search" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -131,14 +134,15 @@
     <!-- ✅ 헤더 -->
     <div class="header">
         <img src="${pageContext.request.contextPath}/resources/img/arrow-left.png" onclick="history.back()">
-        상품 정보 검색
+        <fmt:message key="ingredientsearch.title" />
         <img src="${pageContext.request.contextPath}/resources/img/user.png">
     </div>
 
     <!-- ✅ 검색창 -->
     <form method="get">
         <div class="search-box">
-            <input type="text" name="ingredientName" placeholder="상품명을 검색하세요." value="${param.ingredientName}">
+            <input type="text" name="ingredientName" value="${param.ingredientName}"
+                   placeholder="<fmt:message key='ingredientsearch.search.placeholder' />">
             <button type="submit">
                 <img src="${pageContext.request.contextPath}/resources/img/search.png" alt="검색">
             </button>
@@ -146,39 +150,42 @@
     </form>
 
     <!-- ✅ 검색 결과 타이틀 -->
-    <div class="result-title">상품 검색 결과</div>
+    <div class="result-title"><fmt:message key="ingredientsearch.result.title" /></div>
 
     <div class="results">
-    <c:choose>
-        <c:when test="${not empty results}">
-            <c:forEach var="item" items="${results}">
-                <div class="item">
-                    <div class="image-box">
-                        <img src="${empty item.imagePath 
-                                    ? pageContext.request.contextPath.concat('/resources/img/default.png') 
-                                    : pageContext.request.contextPath.concat(item.imagePath)}" 
-                             alt="${item.prdlstNm}">
+        <c:choose>
+            <c:when test="${not empty results}">
+                <c:forEach var="item" items="${results}">
+                    <div class="item">
+                        <div class="image-box">
+                            <img src="${empty item.imagePath 
+                                        ? pageContext.request.contextPath.concat('/resources/img/default.png') 
+                                        : pageContext.request.contextPath.concat(item.imagePath)}" 
+                                 alt="${item.prdlstNm}">
+                        </div>
+                        <div class="text-box">
+                            <div class="name">${item.prdlstNm}</div>
+                            <div class="expiry">${item.pogDaycnt}</div>
+                        </div>
                     </div>
-                    <div class="text-box">
-                        <div class="name">${item.prdlstNm}</div>
-                        <div class="expiry">${item.pogDaycnt}</div>
-                    </div>
-                </div>
-            </c:forEach>
-        </c:when>
-        <c:otherwise>
-            <p style="grid-column: 1 / -1; text-align:center;">
-                <c:if test="${not empty param.ingredientName}">
-                    ‘${param.ingredientName}’에 대한 검색 결과가 없습니다.
-                </c:if>
-                <c:if test="${empty param.ingredientName}">
-                    검색어를 입력해 주세요.
-                </c:if>
-            </p>
-        </c:otherwise>
-    </c:choose>
-</div>
-
+                </c:forEach>
+            </c:when>
+            <c:otherwise>
+                <p style="grid-column: 1 / -1; text-align:center;">
+                    <c:choose>
+                        <c:when test="${not empty param.ingredientName}">
+                            <fmt:message key="ingredientsearch.result.empty">
+                                <fmt:param value="${param.ingredientName}" />
+                            </fmt:message>
+                        </c:when>
+                        <c:otherwise>
+                            <fmt:message key="ingredientsearch.result.prompt" />
+                        </c:otherwise>
+                    </c:choose>
+                </p>
+            </c:otherwise>
+        </c:choose>
+    </div>
 </div>  <!-- ✅ container 끝 -->
 </body>
 

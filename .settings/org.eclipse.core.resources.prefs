@@ -1,3 +1,11 @@
 eclipse.preferences.version=1
+encoding//src/main/resources/messages_fridge_add_ko.properties=UTF-8
+encoding//src/main/resources/messages_fridge_delete_ko.properties=UTF-8
+encoding//src/main/resources/messages_fridgelist_ko.properties=UTF-8
+encoding//src/main/resources/messages_index_ko.properties=UTF-8
+encoding//src/main/resources/messages_ingredient_search_ko.properties=UTF-8
+encoding//src/main/resources/messages_login_ko.properties=UTF-8
+encoding//src/main/resources/messages_mypage_ko.properties=UTF-8
+encoding//src/main/resources/messages_register_en.properties=UTF-8
 encoding//src/main/webapp/WEB-INF/views/recipe/search_recommend.jsp=UTF-8
 encoding/<project>=UTF-8
