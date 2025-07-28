@@ -13,126 +13,120 @@
   <style>
     :root {
       --primary-color: #168B85;
-      --border-default: #F1F1F1;
+      --border-default: #F1F1F1;  /* 연한 회색 */
       --bg-page: #F2F5FB;
     }
 
+    /* 배경 & 중앙 정렬 */
     body {
       margin: 0;
-      background: var(--bg-page);
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       justify-content: center;
-      align-items: center;
-      font-family: "Pretendard", sans-serif;
+  	  align-items: flex-start; /* 키보드 뜨거나 컨텐츠 많아져도 위에서부터 쌓이게 */
     }
 
+    /* FORM 을 컨테이너 삼기 */
     form {
       width: 90%;
-      max-width: 400px;
-      padding: 5vh 5vw;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      max-width: 360px;
+      padding: 6vh 5vw;
+      background: #ffffff;
+      box-sizing: border-box;
+      box-shadow: 0 1px 2px rgba(16,24,40,0.05);
+      border-radius: 8px;
+
     }
 
-    .form-group {
-      margin-bottom: 24px;
-    }
-
-    .form-group label {
-      font-weight: 600;
-      font-size: 14px;
-      margin-bottom: 6px;
-      display: block;
-      color: #333;
-    }
-
-    .form-group input {
-      width: 100%;
-      padding: 8px 0;
-      border: none;
-      border-bottom: 1.5px solid var(--border-default);
-      font-size: 16px;
-      background: transparent;
-      color: #333;
-      transition: border-color 0.3s;
-    }
-
-    .form-group input:focus {
-      outline: none;
-      border-bottom-color: var(--primary-color);
-    }
-
-    .form-group input::placeholder {
-      color: rgba(0, 0, 0, 0.4);
-    }
-
+    /* 서버 메시지 */
     .alert {
+      font-family: "Pretendard", sans-serif;
+      font-size: 0.9rem;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1rem;
+      border-radius: 0.25rem;
       background: #fff3cd;
       border: 1px solid #ffeeba;
       color: #856404;
-      padding: 0.75rem;
-      border-radius: 4px;
-      margin-bottom: 1rem;
+    }
+
+    /* 입력 그룹 (레이블+필드) */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 4vh;
+    }
+    .form-group label {
+      font-family: "Pretendard", sans-serif;
+      font-weight: 700;
       font-size: 14px;
+      line-height: 20px;
+      color: #333333;
+      transition: color 0.3s;
+    }
+    /* 포커스 시 레이블도 초록으로 */
+    .form-group:focus-within label {
+      color: var(--primary-color);
     }
 
-    .password-strength {
-      height: 4px;
-      border-radius: 3px;
-      margin-top: 5px;
-    }
-
-    .strength-weak { background-color: #dc3545; }
-    .strength-medium { background-color: #ffc107; }
-    .strength-strong { background-color: #28a745; }
-
-    .form-text {
-      font-size: 13px;
-      margin-top: 4px;
-    }
-
-    .btn-register {
-      width: 100%;
-      padding: 12px;
-      background: var(--primary-color);
+    .form-group input {
+      font-family: "Pretendard", sans-serif;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 24px;
       border: none;
-      color: white;
+      border-bottom: 1.5px solid var(--border-default);
+      padding: 0.5rem 0;
+      outline: none;
+      background: transparent;
+      color: #333333;
+      transition: border-color 0.3s;
+    }
+    .form-group input::placeholder {
+      color: rgba(51, 51, 51, 0.5);
+    }
+    /* 포커스 시 밑줄만 초록으로 */
+    .form-group input:focus {
+      border-bottom-color: var(--primary-color);
+    }
+
+    /* 회원가입 버튼 중앙 정렬 */
+    .btn-register {
+      display: block;
+      width: 200px;
+      height: 40px;
+      margin: 4vh auto 0;
+      font-family: "Pretendard", sans-serif;
       font-weight: 600;
       font-size: 16px;
-      border-radius: 6px;
+      text-align: center;
+      background: #aaaaaa;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 1px 2px rgba(16,24,40,0.05);
       cursor: pointer;
+      transition: opacity 0.2s;
     }
-
     .btn-register:hover {
       opacity: 0.9;
     }
 
+    /* 로그인 링크 */
     .login-link {
-      margin-top: 16px;
       text-align: center;
+      font-family: "Pretendard", sans-serif;
       font-size: 14px;
+      margin-top: 2vh;
     }
-
     .login-link a {
       color: var(--primary-color);
-      text-decoration: none;
       font-weight: 600;
+      text-decoration: none;
     }
+  </style>
 
-    .checkbox {
-      margin-top: 8px;
-    }
-
-    .checkbox label {
-      font-size: 14px;
-    }
-
-    #idCheckResult, #passwordText, #passwordMatchResult {
-      font-size: 13px;
-      margin-top: 4px;
-    }
   </style>
 </head>
 <body>
@@ -182,14 +176,6 @@
       <label for="email">이메일</label>
       <input type="email" id="email" name="email" value="${email}" placeholder="이메일을 입력하세요"
              required />
-    </div>
-
-    <!-- 약관 동의 -->
-    <div class="checkbox">
-      <label>
-        <input type="checkbox" id="agreeTerms" required />
-        서비스 이용약관 및 개인정보 처리방침에 동의합니다
-      </label>
     </div>
 
     <!-- 회원가입 버튼 -->
