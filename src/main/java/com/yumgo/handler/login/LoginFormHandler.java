@@ -13,6 +13,7 @@ public class LoginFormHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("UTF-8");
 
 		// 이미 로그인된 사용자는 메인 페이지로 리다이렉트
 		HttpSession session = request.getSession(false);

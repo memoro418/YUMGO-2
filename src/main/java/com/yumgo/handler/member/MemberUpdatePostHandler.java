@@ -11,7 +11,8 @@ import com.yumgo.model.User;
 public class MemberUpdatePostHandler implements CommandHandler {
 
 	@Override
-	public String process(HttpServletRequest request, HttpServletResponse response) {
+	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		Integer userId = (Integer) session.getAttribute("user_id");
 

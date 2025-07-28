@@ -10,7 +10,8 @@ import com.yumgo.model.User;
 public class MemberInsertPostHandler implements CommandHandler {
 
 	@Override
-	public String process(HttpServletRequest request, HttpServletResponse response) {
+	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("UTF-8");
 		UserDAO dao = new UserDAO();
 		/* String userid = request.getParameter("userid"); */ // 고유변호 자동적으로 증가설정했기에 필요없음
 		String username = request.getParameter("username");

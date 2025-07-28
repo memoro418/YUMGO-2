@@ -15,6 +15,7 @@ import com.yumgo.util.DataSource;
 public class RecipeRecommendHandler implements CommandHandler {
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("UTF-8");
 		if (request.getMethod().equalsIgnoreCase("GET")) {
 			return "recipe/search_recommend.jsp";
 		}

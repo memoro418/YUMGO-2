@@ -11,6 +11,7 @@ import com.yumgo.util.DataSource;
 public class FoodSearchPostHandler implements CommandHandler {
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("UTF-8");
 		String recipeName = request.getParameter("recipeName");
 		RecipeDAO dao = new RecipeDAO(new DataSource());
 

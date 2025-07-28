@@ -13,6 +13,7 @@ public class LogoutHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("UTF-8");
 
 		// 세션 무효화
 		HttpSession session = request.getSession(false);

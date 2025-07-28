@@ -17,6 +17,7 @@ public class LoginHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("UTF-8");
 
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
@@ -40,7 +41,6 @@ public class LoginHandler implements CommandHandler {
 				session.setAttribute("useremail", user.getEmail());
 				// 로그인 성공 후 세션 저장
 				session.setAttribute("id", user.getId());
-
 
 				String originalURL = (String) session.getAttribute("originalURL");
 				session.removeAttribute("originalURL");

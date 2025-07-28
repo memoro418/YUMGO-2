@@ -10,6 +10,7 @@ public class HomeHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("UTF-8");
 
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("username") == null) {

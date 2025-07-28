@@ -10,6 +10,7 @@ import com.yumgo.util.DataSource;
 public class RecipeDeleteHandler implements CommandHandler {
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("UTF-8");
 		String recipeName = request.getParameter("name");
 		if (recipeName != null && !recipeName.isEmpty()) {
 			RecipeDAO dao = new RecipeDAO(new DataSource());
