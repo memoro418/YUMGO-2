@@ -6,6 +6,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>내 음식 전체 목록</title>
   <style>
     body {
@@ -20,8 +21,9 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1rem;
       background: #fff;
+      padding: 10px;
+      
     }
     .header img {
       width: 24px;
@@ -38,7 +40,7 @@
       display: flex;
       flex-direction: row;
       gap: 15px;
-      padding: 0 10px;
+      padding: 0 0px;
     }
     .category-item {
       background: none;
