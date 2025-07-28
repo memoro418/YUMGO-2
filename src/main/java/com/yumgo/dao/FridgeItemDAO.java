@@ -32,16 +32,37 @@ public class FridgeItemDAO {
 	}
 
 	// 유통기한 지난 음식 모두 삭제
-	public int deleteExpiredItems() {
-		String sql = "DELETE FROM FRIDGE_ITEM WHERE expiration_date < SYSDATE";
-		try (Connection conn = ds.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+	public List<FridgeItem> deleteExpiredItems() {
+	    List<FridgeItem> deletedItems = new ArrayList<>();
+	    String selectSql = "SELECT username, food_name, expiration_date, category, quantity FROM FRIDGE_ITEM WHERE expiration_date < SYSDATE";
+	    String deleteSql = "DELETE FROM FRIDGE_ITEM WHERE expiration_date < SYSDATE";
 
-			return ps.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return 0;
-		}
+	    try (Connection conn = ds.getConnection();
+	         PreparedStatement selectPs = conn.prepareStatement(selectSql);
+	         ResultSet rs = selectPs.executeQuery()) {
+
+	        // ✅ 삭제될 아이템 목록 저장
+	        while (rs.next()) {
+	            FridgeItem item = new FridgeItem();
+	            item.setUsername(rs.getString("username"));
+	            item.setFoodName(rs.getString("food_name"));
+	            item.setExpirationDate(rs.getDate("expiration_date"));
+	            item.setCategory(rs.getString("category"));
+	            item.setQuantity(rs.getString("quantity"));
+	            deletedItems.add(item);
+	        }
+
+	        // ✅ 실제 삭제 실행
+	        try (PreparedStatement deletePs = conn.prepareStatement(deleteSql)) {
+	            deletePs.executeUpdate();
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return deletedItems;
 	}
+
 
 	// 음식 등록
 	public int insertFridgeItemAuto(FridgeItem item) {
