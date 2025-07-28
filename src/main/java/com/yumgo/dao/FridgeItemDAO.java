@@ -144,6 +144,40 @@ public class FridgeItemDAO {
 		}
 		return itemList;
 	}
+	
+	
+	
+	// 사용자 이름 + 카테고리로 냉장고 음식 조회
+	public List<FridgeItem> findByUsernameAndCategory(String username, String category) {
+	    String sql = "SELECT * FROM FRIDGE_ITEM WHERE USERNAME = ? AND CATEGORY = ?";
+	    List<FridgeItem> itemList = new ArrayList<>();
+
+	    try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+	        ps.setString(1, username);
+	        ps.setString(2, category);
+
+	        try (ResultSet rs = ps.executeQuery()) {
+	            while (rs.next()) {
+	                FridgeItem item = new FridgeItem();
+	                item.setUsername(rs.getString("USERNAME"));
+	                item.setFoodName(rs.getString("food_name"));
+	                item.setExpirationDate(rs.getDate("expiration_date"));
+	                item.setCategory(rs.getString("category"));
+	                item.setQuantity(rs.getString("quantity"));
+	                itemList.add(item);
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return itemList;
+	}
+
+	
+	
+	
+	
+	
 
 	// 오늘 기준으로 본인의 7일 이내 유통기한 임박 식품 수 조회
 	public int countExpiringSoonItemsByUserId(int userId) {
