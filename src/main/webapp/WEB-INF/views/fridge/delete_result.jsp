@@ -8,147 +8,306 @@
 <title>냉장고 음식 삭제 – YUMGO</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
 <style>
+  /* ✅ 전체 레이아웃 */
   body {
     font-family: 'Pretendard', sans-serif;
-    background: #f2f5fb;
+    margin: 0;
+    background: #FFFFFF;
     display: flex;
     justify-content: center;
-    padding: 20px;
-    margin: 0;
   }
+
   .container {
     width: 100%;
     max-width: 360px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    padding: 20px;
+    background: #FFFFFF;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
-  h2 {
+
+  /* ✅ 헤더 */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;  /* ✅ 헤더 높이 늘림 */
+    padding: 0 16px;
+    position: relative;
+    background: #FFFFFF;
+    box-sizing: border-box;
+  }
+
+  .header h1 {
     font-size: 20px;
     font-weight: 700;
-    color: #168B85;
-    text-align: center;
-    margin-bottom: 15px;
+    color: #0D6564;
+    margin: 0;
   }
-  h3 {
-    font-size: 16px;
-    font-weight: 600;
-    color: #333;
+
+  /* ✅ 뒤로가기 버튼 */
+  .header .back-btn {
+    position: absolute;
+    left: 16px;
+    width: 24px;
+    height: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+  /* ✅ 마이페이지 버튼 */
+  .header .user-btn {
+    position: absolute;
+    right: 16px;
+    width: 24px;
+    height: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+  /* ✅ 메인 배경 */
+  .main-content {
+    background: rgba(233, 247, 244, 0.5);
+    flex: 1;
+    padding: 15px;
+  }
+
+  /* ✅ 특정 음식 삭제 섹션 */
+  .delete-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+  }
+
+  .delete-left {
+    width: 55%;
+  }
+
+  .delete-left h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #0D6564;
     margin-bottom: 10px;
   }
-  form {
-    margin-bottom: 20px;
-    padding: 15px;
-    border: 1px solid #eee;
-    border-radius: 8px;
-    background: #fafafa;
+
+  /* ✅ 입력 필드 */
+  .input-group {
+    position: relative;
+    margin-bottom: 12px;
+    text-align: right;  /* ✅ 입력 필드 안의 텍스트 오른쪽 정렬 */
   }
-  label {
-    font-size: 14px;
-    font-weight: 600;
-    color: #555;
+
+  .input-group img {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
   }
-  input[type="text"] {
+
+  .input-group input {
     width: 100%;
-    padding: 8px;
-    margin: 6px 0 12px 0;
-    border: none;
-    border-bottom: 1.5px solid #168B85;
-    outline: none;
+    padding: 8px 16px 8px 40px;
+    border: 1px solid #168B85;
+    border-radius: 10px;
     font-size: 14px;
-    background: transparent;
+    background: #FFFFFF;
+    box-sizing: border-box;
+    text-align: right;  /* ✅ 텍스트 입력도 오른쪽 정렬 */
   }
-  button {
+
+  /* ✅ 삭제 버튼 */
+  .delete-btn {
     width: 100%;
     padding: 10px;
-    background: #168B85;
+    background: #0D6564;
     color: #fff;
-    border: none;
-    border-radius: 6px;
     font-weight: 600;
+    border: none;
+    border-radius: 20px;
+    margin-top: 10px;
     cursor: pointer;
-    margin-top: 8px;
   }
-  button:hover {
+
+  .delete-btn:hover {
     opacity: 0.9;
   }
-  .danger-btn {
-    background: #FF6B6B;
+
+  /* ✅ 오른쪽 냉장고 이미지 */
+  .delete-right img {
+    width: 140px;
+    height: 175px;
   }
-  .result-box {
-    margin-top: 20px;
-    padding: 15px;
-    border-radius: 8px;
-    background: #e9f7f4;
-    border: 1px solid #ddd;
+
+  /* ✅ 유통기한 지난 음식 전체 삭제 */
+  .expired-section {
+    margin-top: 50px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;   /* ✅ stopwatch와 텍스트 사이 여백 추가 */
   }
-  .result-title {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 10px;
+
+  .expired-section img {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+  }
+
+  .expired-text {
+    flex: 1;
+  }
+
+  .expired-text h2 {
+    font-size: 20px;
+    font-weight: 700;
     color: #0D6564;
+    margin: 0 0 8px 0;
   }
-  .result-list {
-    list-style: none;
-    padding: 0;
+
+  .expired-btn {
+    width: 80%;
+    padding: 10px;
+    background: #FB6262;
+    color: #fff;
+    font-weight: 600;
+    border: 1px solid #FA0000;
+    border-radius: 8px;
+    cursor: pointer;
   }
-  .result-list li {
+
+  .expired-btn:hover {
+    opacity: 0.9;
+  }
+
+  /* ✅ 삭제 결과 */
+  .result-box {
+    margin-top: 30px;
+    background: #E0F7F4;
+    border: 1px solid #168B85;
+    border-radius: 10px;
+    padding: 10px;
+    width: 90%;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .result-box h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0D6564;
+    margin-bottom: 8px;
+    text-align: center;  /* ✅ 제목만 가운데 정렬 */
+  }
+
+  .result-box p {
     font-size: 14px;
-    padding: 6px 0;
-    border-bottom: 1px solid #ddd;
+    font-weight: 600;
+    color: #0D6564;
+    margin-bottom: 10px;
+    text-align: left;   /* ✅ 메시지는 왼쪽 정렬 */
   }
+
+  .deleted-item {
+    background: #fff;
+    border: 2px solid #0D6564;
+    border-radius: 10px;
+    padding: 6px;
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #333;
+    text-align: left;   /* ✅ 삭제된 항목도 왼쪽 정렬 */
+  }
+
+  /* ✅ 홈으로 돌아가기 */
   .home-link {
-    text-align: center;
     display: block;
-    margin-top: 15px;
+    text-align: center;
+    margin: 20px 0;
     font-size: 14px;
+    font-weight: 600;
     color: #168B85;
     text-decoration: none;
-    font-weight: 600;
   }
 </style>
 </head>
 <body>
 <div class="container">
 
-  <h2>냉장고 음식 삭제</h2>
+  <!-- ✅ 헤더 -->
+  <div class="header">
+    <img src="${pageContext.request.contextPath}/resources/img/arrow-left.png" class="back-btn" onclick="history.back()">
+    <h1>냉장고 음식 삭제</h1>
+    <a href="${pageContext.request.contextPath}/member/mypage.do">
+      <img src="${pageContext.request.contextPath}/resources/img/user.png" class="user-btn">
+    </a>
+  </div>
 
-  <!-- ✅ 특정 음식 삭제 -->
-  <form method="post" action="${pageContext.request.contextPath}/fridge/delete.do">
-    <h3>특정 음식 삭제</h3>
-    <label>사용자 이름</label>
-    <input type="text" name="username" placeholder="예: 홍길동" required>
+  <!-- ✅ 메인 내용 -->
+  <div class="main-content">
 
-    <label>음식 이름</label>
-    <input type="text" name="foodName" placeholder="예: 김치" required>
+    <!-- ✅ 특정 음식 삭제 -->
+    <div class="delete-section">
+      <div class="delete-left">
+        <h2>특정 음식 삭제</h2>
 
-    <button type="submit">삭제</button>
-  </form>
+        <form method="post" action="${pageContext.request.contextPath}/fridge/delete.do">
+          <div class="input-group">
+            <img src="${pageContext.request.contextPath}/resources/img/username.png">
+            <input type="text" name="username" placeholder="사용자 이름" required>
+          </div>
 
-  <!-- ✅ 유통기한 지난 음식 전체 삭제 -->
-  <form method="post" action="${pageContext.request.contextPath}/fridge/deleteExpired.do">
-    <h3>유통기한 지난 음식 전체 삭제</h3>
-    <button type="submit" class="danger-btn">전체 삭제</button>
-  </form>
+          <div class="input-group">
+            <img src="${pageContext.request.contextPath}/resources/img/foodname.png">
+            <input type="text" name="foodName" placeholder="음식 이름" required>
+          </div>
 
-  <!-- ✅ 삭제 결과 출력 영역 -->
-  <c:if test="${not empty message}">
-    <div class="result-box">
-      <div class="result-title">삭제 결과</div>
-      <p>${message}</p>
+          <button type="submit" class="delete-btn">삭제</button>
+        </form>
+      </div>
 
-      <c:if test="${not empty deletedItems}">
-        <ul class="result-list">
-          <c:forEach var="item" items="${deletedItems}">
-            <li>${item.username} - ${item.foodName} (${item.expirationDate})</li>
-          </c:forEach>
-        </ul>
-      </c:if>
+      <!-- ✅ 오른쪽 냉장고 이미지 -->
+      <div class="delete-right">
+        <img src="${pageContext.request.contextPath}/resources/img/logo-4.png">
+      </div>
     </div>
-  </c:if>
 
-  <a href="${pageContext.request.contextPath}/index.do" class="home-link">홈으로 돌아가기</a>
+    <!-- ✅ 유통기한 지난 음식 전체 삭제 -->
+    <div class="expired-section">
+      <img src="${pageContext.request.contextPath}/resources/img/stopwatch.png">
+      <div class="expired-text">
+        <h2>유통기한 지난 음식 전체 삭제</h2>
+        <form method="post" action="${pageContext.request.contextPath}/fridge/deleteExpired.do">
+          <button type="submit" class="expired-btn">전체 삭제</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ✅ 삭제 결과 출력 -->
+    <c:if test="${not empty message}">
+      <div class="result-box">
+        <h3>삭제 결과</h3>
+        <p>${message}</p>
+
+        <c:if test="${not empty deletedItems}">
+          <c:forEach var="item" items="${deletedItems}">
+            <div class="deleted-item">
+              ${item.username} - ${item.foodName} (${item.expirationDate})
+            </div>
+          </c:forEach>
+        </c:if>
+      </div>
+    </c:if>
+
+    <!-- ✅ 홈으로 돌아가기 -->
+    <a href="${pageContext.request.contextPath}/index.do" class="home-link">홈으로 돌아가기</a>
+
+  </div>
 </div>
 </body>
 </html>
