@@ -1,19 +1,28 @@
 package com.yumgo.handler.fridge;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.yumgo.dao.FridgeItemDAO;
 import com.yumgo.handler.CommandHandler;
+import com.yumgo.model.FridgeItem;
 
 public class FridgeDeleteExpiredHandler implements CommandHandler {
-
     @Override
     public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
         FridgeItemDAO dao = new FridgeItemDAO();
-        int result = dao.deleteExpiredItems();
+        List<FridgeItem> deletedItems = dao.deleteExpiredItems();
 
-        request.setAttribute("message", result > 0 ? result + "개 항목 삭제됨" : "삭제할 항목이 없습니다");
+        if (deletedItems.isEmpty()) {
+            request.setAttribute("message", "fridgedelete.result.noitem");
+        } else {
+            request.setAttribute("message", "fridgedelete.result.success");
+            request.setAttribute("deletedItems", deletedItems);
+            request.setAttribute("deletedCount", deletedItems.size());
+        }
+
         return "fridge/delete_result.jsp";
     }
 }

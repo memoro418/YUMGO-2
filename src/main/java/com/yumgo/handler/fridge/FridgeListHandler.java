@@ -1,5 +1,6 @@
 package com.yumgo.handler.fridge;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,37 +13,42 @@ import com.yumgo.model.FridgeItem;
 
 public class FridgeListHandler implements CommandHandler {
 
-    private FridgeItemDAO fridgeItemDAO = new FridgeItemDAO();
+	private FridgeItemDAO fridgeItemDAO = new FridgeItemDAO();
 
-    @Override
-    public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String category = request.getParameter("category");
-        String myParam = request.getParameter("my");
-        List<FridgeItem> itemList;
+	@Override
+	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String category = request.getParameter("category");
+		String myParam = request.getParameter("my");
+		List<FridgeItem> itemList;
 
-        // 로그인 사용자 세션에서 가져오기
-        HttpSession session = request.getSession();
-        String username = (String) session.getAttribute("username");
+		HttpSession session = request.getSession(false);
+		String username = null;
+		if (session != null) {
+			username = (String) session.getAttribute("username");
+		}
 
-        
-        // 필터 기능 추가 (전체 / my)
-        if ("true".equals(myParam)) {
-            if (category != null && !category.equals("전체")) {
-                itemList = fridgeItemDAO.findByUsernameAndCategory(username, category);
-            } else {
-                itemList = fridgeItemDAO.findByUsername(username);
-            }
-        } else {
-            // 전체 보기
-            if (category != null && !category.equals("전체")) {
-                itemList = fridgeItemDAO.findByCategory(category);
-            } else {
-                itemList = fridgeItemDAO.findAll();
-            }
-        }
+		if ("true".equals(myParam)) {
+			if (username == null) {
+				response.sendRedirect(request.getContextPath() + "/login/loginform.do");
+				return null;
+			}
+			if (category != null && !category.equals("전체")) {
+				itemList = fridgeItemDAO.findByUsernameAndCategory(username, category);
+			} else {
+				itemList = fridgeItemDAO.findByUsername(username);
+			}
+		} else {
+			if (category != null && !category.equals("전체")) {
+				itemList = fridgeItemDAO.findByCategory(category);
+			} else {
+				itemList = fridgeItemDAO.findAll();
+			}
+		}
+		List<String> categoryList = Arrays.asList("전체", "채소류", "과일류", "유제품", "육류", "조리반찬", "음료", "냉동식품", "기타");
+		request.setAttribute("categoryList", categoryList);
 
-        request.setAttribute("itemList", itemList);
-        request.setAttribute("selectedCategory", category);
-        return "fridge/fridge_list.jsp";
-    }
+		request.setAttribute("itemList", itemList);
+		request.setAttribute("selectedCategory", category);
+		return "fridge/fridge_list.jsp";
+	}
 }

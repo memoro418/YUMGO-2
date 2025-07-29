@@ -34,7 +34,18 @@
         <filter-name>securityFilter</filter-name>
         <url-pattern>*.do</url-pattern>
     </filter-mapping>
+    
+    <!-- 국제화 필터 (ko, en)-->
+    <filter>
+    	<filter-name>LocaleFilter</filter-name>
+    	<filter-class>com.yumgo.filter.LocaleFilter</filter-class>
+	</filter>
 
+	<filter-mapping>
+    	<filter-name>LocaleFilter</filter-name>
+    	<url-pattern>/*</url-pattern>
+	</filter-mapping>
+    
     <!-- Dispatcher Servlet -->
     <servlet>
         <servlet-name>dispatcherServlet</servlet-name>
@@ -78,6 +89,7 @@
             <secure>false</secure>
         </cookie-config>
     </session-config>
+
 
     <!-- MIME 타입 설정 -->
 <!--     <mime-mapping>

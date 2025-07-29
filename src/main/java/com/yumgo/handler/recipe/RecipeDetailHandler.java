@@ -14,6 +14,7 @@ import com.yumgo.util.DataSource;
 public class RecipeDetailHandler implements CommandHandler {
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("UTF-8");
 		String recipeName = request.getParameter("name");
 		if (recipeName == null || recipeName.isEmpty()) {
 			request.setAttribute("error", "레시피 이름이 없습니다.");

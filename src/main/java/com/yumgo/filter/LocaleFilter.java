@@ -1,13 +1,11 @@
 package com.yumgo.filter;
 
 import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.Locale;
 
 public class LocaleFilter implements Filter {
-
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
@@ -15,16 +13,19 @@ public class LocaleFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession session = req.getSession();
 
-        // 세션에 언어 설정 없으면 브라우저 언어에서 자동 감지
-        if (session.getAttribute("lang") == null) {
-            String browserLang = request.getLocale().getLanguage(); // ex: "en", "ko"
-            if ("en".equals(browserLang)) {
-                session.setAttribute("lang", "en");
-            } else {
-                session.setAttribute("lang", "ko");
-            }
-        }
+        String lang = req.getParameter("lang");
 
+//        if (lang != null) {
+//            Locale locale = new Locale(lang);
+//            session.setAttribute("javax.servlet.jsp.jstl.fmt.locale.session", locale);
+//        }
+
+        if (lang != null) {
+            Locale locale = Locale.forLanguageTag(lang);
+            session.setAttribute("javax.servlet.jsp.jstl.fmt.locale.session", locale);
+        }
+        
+        
         chain.doFilter(request, response);
     }
 }

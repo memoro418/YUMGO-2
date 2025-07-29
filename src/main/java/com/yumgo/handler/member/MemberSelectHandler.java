@@ -11,7 +11,8 @@ import com.yumgo.model.User;
 public class MemberSelectHandler implements CommandHandler {
 
 	@Override
-	public String process(HttpServletRequest request, HttpServletResponse response) {
+	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
 		if (username != null) {

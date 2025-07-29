@@ -10,6 +10,7 @@ public class HomeHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("UTF-8");
 
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("username") == null) {
@@ -25,8 +26,8 @@ public class HomeHandler implements CommandHandler {
 		// 냉장고 요약 데이터 가져오기
 		FridgeItemDAO dao = new FridgeItemDAO();
 		int expiringCount = dao.countExpiringSoonItemsByUserId(userId);
-		int todayStoredCount = dao.countTodayStoredItemsByUserId(userId);
-		int totalCount = dao.countAllItemsByUserId(userId);
+		int todayStoredCount = dao.countTodayStoredItems();
+		int totalCount = dao.countTodayStoredItemsByUserId(userId);
 		int StoredTotal = dao.countStoredItemsAll();
 		// JSP에 전달
 		request.setAttribute("expiringCount", expiringCount);

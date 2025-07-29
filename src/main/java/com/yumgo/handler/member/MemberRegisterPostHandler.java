@@ -16,7 +16,7 @@ public class MemberRegisterPostHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+		request.setCharacterEncoding("UTF-8");
 		// 파라미터 받기
 		String username = request.getParameter("username");
 		String id = request.getParameter("id");

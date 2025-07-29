@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+ <fmt:setBundle basename="messages_login" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -94,44 +96,45 @@
     </style>
 </head>
 <body>
-    <div class="login-container">
 
-        <!-- 동적 메시지 출력 -->
+    <div class="login-container">
         <c:if test="${not empty message}">
             <div class="alert alert-warning">${message}</div>
         </c:if>
         <c:if test="${param.logout eq 'success'}">
-            <div class="alert alert-success">성공적으로 로그아웃되었습니다.</div>
+            <div class="alert alert-success">
+                <fmt:message key="login.logout.success" />
+            </div>
         </c:if>
 
-        <!-- 로그인 폼 -->
         <form method="post" action="${pageContext.request.contextPath}/login/login.do">
-            <!-- 로고 -->
             <img src="${pageContext.request.contextPath}/resources/img/fulllogo.png" alt="YUMGO Logo" class="login-logo" />
 
-            <label for="id">아이디</label>
+            <label for="id"><fmt:message key="login.label.id" /></label>
             <input
                 type="text"
                 id="id"
                 name="id"
-                placeholder="아이디를 입력하세요"
+                placeholder="<fmt:message key='login.placeholder.id' />"
                 value="${id}"
                 required
                 autofocus
             />
 
-            <label for="password">비밀번호</label>
+            <label for="password"><fmt:message key="login.label.password" /></label>
             <input
                 type="password"
                 id="password"
                 name="password"
-                placeholder="비밀번호를 입력하세요"
+                placeholder="<fmt:message key='login.placeholder.password' />"
                 required
             />
 
             <div class="btn-group">
-                <button type="submit" class="btn-login">로그인</button>
-                <a href="${pageContext.request.contextPath}/member/register.do" class="btn-register">회원가입</a>
+                <button type="submit" class="btn-login"><fmt:message key="login.button.login" /></button>
+                <a href="${pageContext.request.contextPath}/member/register.do" class="btn-register">
+                    <fmt:message key="login.button.register" />
+                </a>
             </div>
         </form>
     </div>

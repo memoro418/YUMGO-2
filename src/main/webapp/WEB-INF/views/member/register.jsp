@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setBundle basename="messages_register" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -141,23 +143,26 @@
 
     <!-- 사용자명 -->
     <div class="form-group">
-      <label for="username">이름</label>
-      <input type="text" id="username" name="username" value="${username}" placeholder="이름을 입력하세요"
+      <label for="username"><fmt:message key="register.label.username"/></label>
+      <input type="text" id="username" name="username" value="${username}"
+             placeholder="<fmt:message key='register.placeholder.username'/>"
              required minlength="2" maxlength="20" />
     </div>
 
     <!-- 아이디 -->
     <div class="form-group">
-      <label for="id">아이디</label>
-      <input type="text" id="id" name="id" value="${id}" placeholder="아이디를 입력하세요"
+      <label for="id"><fmt:message key="register.label.id"/></label>
+      <input type="text" id="id" name="id" value="${id}"
+             placeholder="<fmt:message key='register.placeholder.id'/>"
              required minlength="4" maxlength="20" onblur="checkIdDuplicate();" />
       <div id="idCheckResult" class="form-text"></div>
     </div>
 
     <!-- 비밀번호 -->
     <div class="form-group">
-      <label for="password">비밀번호</label>
-      <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요"
+      <label for="password"><fmt:message key="register.label.password"/></label>
+      <input type="password" id="password" name="password"
+             placeholder="<fmt:message key='register.placeholder.password'/>"
              required minlength="4" oninput="checkPasswordStrength();" />
       <div id="passwordStrength" class="password-strength"></div>
       <div id="passwordText" class="form-text"></div>
@@ -165,26 +170,32 @@
 
     <!-- 비밀번호 확인 -->
     <div class="form-group">
-      <label for="confirmPassword">비밀번호 확인</label>
+      <label for="confirmPassword"><fmt:message key="register.label.passwordConfirm"/></label>
       <input type="password" id="confirmPassword" name="confirmPassword"
-             placeholder="비밀번호를 다시 입력하세요" required oninput="checkPasswordMatch();" />
+             placeholder="<fmt:message key='register.placeholder.passwordConfirm'/>"
+             required oninput="checkPasswordMatch();" />
       <div id="passwordMatchResult" class="form-text"></div>
     </div>
 
     <!-- 이메일 -->
     <div class="form-group">
-      <label for="email">이메일</label>
-      <input type="email" id="email" name="email" value="${email}" placeholder="이메일을 입력하세요"
+      <label for="email"><fmt:message key="register.label.email"/></label>
+      <input type="email" id="email" name="email" value="${email}"
+             placeholder="<fmt:message key='register.placeholder.email'/>"
              required />
     </div>
 
     <!-- 회원가입 버튼 -->
-    <button type="submit" class="btn-register">회원가입</button>
+    <button type="submit" class="btn-register">
+      <fmt:message key="register.button.submit"/>
+    </button>
 
     <!-- 로그인 링크 -->
     <div class="login-link">
-      이미 계정이 있으신가요?
-      <a href="${pageContext.request.contextPath}/login/loginform.do">로그인</a>
+      <fmt:message key="register.link.haveaccount"/>
+      <a href="${pageContext.request.contextPath}/login/loginform.do">
+        <fmt:message key="register.link.login"/>
+      </a>
     </div>
   </form>
 
@@ -256,7 +267,6 @@
         return;
       }
 
-      // 실제 구현 시 Ajax로 서버 중복 확인
       setTimeout(() => {
         result.textContent = '사용 가능한 아이디입니다';
         result.style.color = '#28a745';
@@ -270,7 +280,7 @@
       const pw = document.getElementById('password').value;
       const cpw = document.getElementById('confirmPassword').value;
       const email = document.getElementById('email').value.trim();
-      const agree = document.getElementById('agreeTerms').checked;
+      const agree = document.getElementById('agreeTerms')?.checked ?? true;
 
       if (username.length < 2 || username.length > 20) {
         alert('이름을 2~20자 사이로 입력하세요');

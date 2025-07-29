@@ -15,6 +15,7 @@ import com.yumgo.util.DataSource;
 public class RecipeRecommendHandler implements CommandHandler {
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("UTF-8");
 		if (request.getMethod().equalsIgnoreCase("GET")) {
 			return "recipe/search_recommend.jsp";
 		}
@@ -25,6 +26,12 @@ public class RecipeRecommendHandler implements CommandHandler {
 		if ("recommend".equals(type)) {
 			String ingredientName = request.getParameter("ingredientName");
 			List<Recipe> recipes = dao.getRecipesByIngredientName(ingredientName);
+		    // ✅ [DEBUG] 여기서 바로 로그 찍기
+		    System.out.println("✅ Handler에서 받은 recipes 리스트 (" + recipes.size() + "개):");
+		    for (Recipe r : recipes) {
+		        System.out.println("   ▶ " + r.getName() + " | " + r.getImagePath());
+		    }
+
 			request.setAttribute("ingredientName", ingredientName);
 			request.setAttribute("recipes", recipes);
 		} else if ("search".equals(type)) {
