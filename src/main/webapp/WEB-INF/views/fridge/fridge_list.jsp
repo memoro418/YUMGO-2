@@ -1,6 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<fmt:setBundle basename="messages_fridgelist" />
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -146,10 +149,15 @@
   <c:out value="전체,채소류,과일류,유제품,육류,조리반찬,음료,냉동식품,기타" />
 </c:set>
 <c:set var="categoryList" value="${fn:split(categories, ',')}" />
+<c:set var="selectedCategory" value="${param.category != null ? param.category : '전체'}" />
 
 <div class="header">
-  <img src="${pageContext.request.contextPath}/resources/img/arrow-left.png" onclick="history.back()">
-  <h2 style="font-weight:700; font-size:20px; color:#0D6564;">공유 냉장고</h2>
+  <a href="${pageContext.request.contextPath}/index.do" class="home-link">
+  <img src="${pageContext.request.contextPath}/resources/img/arrow-left.png"">
+  </a>
+  <h2 style="font-weight:700; font-size:20px; color:#0D6564;">
+    <fmt:message key="fridge.title" />
+  </h2>
   <a href="${pageContext.request.contextPath}/member/mypage.do">
     <img class="user" src="${pageContext.request.contextPath}/resources/img/user.png" alt="사용자 아이콘">
   </a>
@@ -166,11 +174,23 @@
             cat == '유제품' ? 'milk' :
             cat == '육류' ? 'meat' :
             cat == '조리반찬' ? 'side-dish' :
-            cat == '음료' ? 'champagne' :
+            cat == '음료' ? 'drink' :
             cat == '냉동식품' ? 'frozen' :
             'etc'
         }.png">
-        <span>${cat}</span>
+        <span>
+          <fmt:message key="fridge.category.${
+            cat == '전체' ? 'all' :
+            cat == '채소류' ? 'vegetable' :
+            cat == '과일류' ? 'fruits' :
+            cat == '유제품' ? 'milk' :
+            cat == '육류' ? 'meat' :
+            cat == '조리반찬' ? 'side' :
+            cat == '음료' ? 'drink' :
+            cat == '냉동식품' ? 'frozen' :
+            'etc'
+          }"/>
+        </span>
       </button>
     </c:forEach>
   </form>
@@ -180,18 +200,57 @@
 
 <div class="tab-container">
   <div class="tab-btn ${empty param.my ? 'active' : ''}" 
-       onclick="location.href='${pageContext.request.contextPath}/fridge/list.do'">전체</div>
+       onclick="location.href='${pageContext.request.contextPath}/fridge/list.do'">
+    <fmt:message key="fridge.tab.all" />
+  </div>
   <div class="tab-btn ${not empty param.my ? 'active' : ''}" 
-       onclick="location.href='${pageContext.request.contextPath}/fridge/list.do?my=true'">MY</div>
+       onclick="location.href='${pageContext.request.contextPath}/fridge/list.do?my=true'">
+    <fmt:message key="fridge.tab.my" />
+  </div>
 </div>
 
 <div class="category-title">
-  ${param.category != null ? param.category : '전체'} (${itemList.size()})
+  <fmt:message key="fridge.category.title">
+    <fmt:param>
+      <c:choose>
+        <c:when test="${selectedCategory == '전체'}">
+          <fmt:message key="fridge.category.all" />
+        </c:when>
+        <c:when test="${selectedCategory == '채소류'}">
+          <fmt:message key="fridge.category.vegetable" />
+        </c:when>
+        <c:when test="${selectedCategory == '과일류'}">
+          <fmt:message key="fridge.category.fruits" />
+        </c:when>
+        <c:when test="${selectedCategory == '유제품'}">
+          <fmt:message key="fridge.category.milk" />
+        </c:when>
+        <c:when test="${selectedCategory == '육류'}">
+          <fmt:message key="fridge.category.meat" />
+        </c:when>
+        <c:when test="${selectedCategory == '조리반찬'}">
+          <fmt:message key="fridge.category.side" />
+        </c:when>
+        <c:when test="${selectedCategory == '음료'}">
+          <fmt:message key="fridge.category.drink" />
+        </c:when>
+        <c:when test="${selectedCategory == '냉동식품'}">
+          <fmt:message key="fridge.category.frozen" />
+        </c:when>
+        <c:otherwise>
+          <fmt:message key="fridge.category.etc" />
+        </c:otherwise>
+      </c:choose>
+    </fmt:param>
+    <fmt:param value="${itemList.size()}" />
+  </fmt:message>
 </div>
 
 <c:choose>
   <c:when test="${empty itemList}">
-    <p style="padding: 1rem;">표시할 음식이 없습니다.</p>
+    <p style="padding: 1rem;">
+      <fmt:message key="fridge.empty" />
+    </p>
   </c:when>
   <c:otherwise>
     <div class="item-grid">
@@ -208,7 +267,11 @@
             'list-etc'
           }.png">
           <div class="food-name">${item.foodName}</div>
-          <div class="quantity">${item.quantity}개</div>
+          <div class="quantity">
+            <fmt:message key="fridge.unit.count">
+              <fmt:param value="${item.quantity}" />
+            </fmt:message>
+          </div>
           <div class="expiry">${item.expirationDate}</div>
         </div>
       </c:forEach>

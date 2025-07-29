@@ -1,5 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<fmt:setBundle basename="messages_recipe" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -112,53 +115,53 @@
 
     <!-- ✅ 상단 이미지 -->
     <div class="top-image"
-     style="background: url('${pageContext.request.contextPath}${recipe.imagePath}') center/cover no-repeat;">
-	</div>
+         style="background: url('${pageContext.request.contextPath}${recipe.imagePath}') center/cover no-repeat;">
+    </div>
 
     <!-- ✅ 제목 & 요약 -->
     <div class="title-wrap">
-        <h2>${recipe.name}</h2>
-        <p>${recipe.summary}</p>
+        <h2><c:out value="${recipe.name}" /></h2>
+        <p><c:out value="${recipe.summary}" /></p>
     </div>
 
     <!-- ✅ 상세 정보 박스 -->
     <div class="detail-box">
         <div class="detail-row">
-            <span class="detail-label">요리 장르</span>
-            <span class="detail-value">한식</span>
+            <span class="detail-label"><fmt:message key="recipe.detail.genre" /></span>
+            <span class="detail-value"><fmt:message key="recipe.detail.genre.korean" /></span>
         </div>
         <div class="detail-row">
-            <span class="detail-label">조리 방식</span>
-            <span class="detail-value">찌개</span>
+            <span class="detail-label"><fmt:message key="recipe.detail.method" /></span>
+            <span class="detail-value"><fmt:message key="recipe.detail.method.stew" /></span>
         </div>
         <div class="detail-row">
-            <span class="detail-label">열량</span>
+            <span class="detail-label"><fmt:message key="recipe.detail.calorie" /></span>
             <span class="detail-value">${recipe.calorie}kcal</span>
         </div>
         <div class="detail-row">
-            <span class="detail-label">조리 시간</span>
+            <span class="detail-label"><fmt:message key="recipe.detail.time" /></span>
             <span class="detail-value">${recipe.cookingTime}</span>
         </div>
 
         <!-- ✅ 조리법 (임시로 하드코딩) -->
-        <div class="recipe-step-title">조리법</div>
-		<ol class="recipe-steps">
-		    <c:if test="${not empty recipe.cookingStep1}">
-		        <li>${recipe.cookingStep1}</li>
-		    </c:if>
-		    <c:if test="${not empty recipe.cookingStep2}">
-		        <li>${recipe.cookingStep2}</li>
-		    </c:if>
-		    <c:if test="${not empty recipe.cookingStep3}">
-		        <li>${recipe.cookingStep3}</li>
-		    </c:if>
-		</ol>
+        <div class="recipe-step-title"><fmt:message key="recipe.detail.steps" /></div>
+        <ol class="recipe-steps">
+            <c:if test="${not empty recipe.cookingStep1}">
+                <li><c:out value="${recipe.cookingStep1}" /></li>
+            </c:if>
+            <c:if test="${not empty recipe.cookingStep2}">
+                <li><c:out value="${recipe.cookingStep2}" /></li>
+            </c:if>
+            <c:if test="${not empty recipe.cookingStep3}">
+                <li><c:out value="${recipe.cookingStep3}" /></li>
+            </c:if>
+        </ol>
 
         <!-- ✅ 재료 -->
-        <div class="ingredient-title">재료</div>
+        <div class="ingredient-title"><fmt:message key="recipe.detail.ingredients" /></div>
         <ul class="ingredients-list">
             <c:forEach var="ingredient" items="${ingredients}">
-                <li>${ingredient.ingredientName}</li>
+                <li><c:out value="${ingredient.ingredientName}" /></li>
             </c:forEach>
         </ul>
     </div>

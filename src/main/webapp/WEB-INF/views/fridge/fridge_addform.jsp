@@ -161,7 +161,9 @@
 
 <!-- ✅ 헤더 -->
 <div class="header">
-  <img src="${pageContext.request.contextPath}/resources/img/arrow-left.png" onclick="history.back()">
+  <a href="${pageContext.request.contextPath}/index.do" class="home-link">
+  <img src="${pageContext.request.contextPath}/resources/img/arrow-left.png">
+  </a>
   <h1><fmt:message key="fridge.add.title"/></h1>
   <img src="${pageContext.request.contextPath}/resources/img/user.png">
 </div>

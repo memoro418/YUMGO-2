@@ -131,8 +131,10 @@
 
   <!-- 헤더 -->
   <div class="header">
+  <a href="${pageContext.request.contextPath}/index.do" class="home-link">
     <img src="${pageContext.request.contextPath}/resources/img/arrow-left.png"
-         class="icon" alt="뒤로가기" onclick="history.back()"/>
+         class="icon" alt="뒤로가기" />
+         </a>
     <div class="header-title">레시피 검색</div>
     <a href="${pageContext.request.contextPath}/member/mypage.do">
   	<img class="user" src="${pageContext.request.contextPath}/resources/img/user.png" alt="사용자 아이콘">
