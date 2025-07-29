@@ -16,12 +16,13 @@ public class FridgeDeleteExpiredHandler implements CommandHandler {
         List<FridgeItem> deletedItems = dao.deleteExpiredItems();
 
         if (deletedItems.isEmpty()) {
-            request.setAttribute("message", "삭제할 항목이 없습니다.");
+            request.setAttribute("message", "fridgedelete.result.noitem");
         } else {
-            request.setAttribute("message", deletedItems.size() + "개 항목이 삭제되었습니다.");
+            request.setAttribute("message", "fridgedelete.result.success");
             request.setAttribute("deletedItems", deletedItems);
+            request.setAttribute("deletedCount", deletedItems.size());
         }
 
-        return "fridge/delete_result.jsp"; // 결과 JSP에 바로 넘김
+        return "fridge/delete_result.jsp";
     }
 }

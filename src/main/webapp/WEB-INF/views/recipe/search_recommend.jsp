@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setBundle basename="messages_recipe" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -131,14 +133,15 @@
 
   <!-- 헤더 -->
   <div class="header">
-  <a href="${pageContext.request.contextPath}/index.do" class="home-link">
-    <img src="${pageContext.request.contextPath}/resources/img/arrow-left.png"
-         class="icon" alt="뒤로가기" />
-         </a>
-    <div class="header-title">레시피 검색</div>
+    <a href="${pageContext.request.contextPath}/index.do" class="home-link">
+      <img src="${pageContext.request.contextPath}/resources/img/arrow-left.png"
+           class="icon" alt="<fmt:message key='recipe.alt.back' />" />
+    </a>
+    <div class="header-title"><fmt:message key="recipe.title" /></div>
     <a href="${pageContext.request.contextPath}/member/mypage.do">
-  	<img class="icon" src="${pageContext.request.contextPath}/resources/img/user.png" alt="사용자 아이콘">
-	</a>
+      <img class="icon" src="${pageContext.request.contextPath}/resources/img/user.png"
+           alt="<fmt:message key='recipe.alt.user' />">
+    </a>
   </div>
 
   <div class="container">
@@ -147,11 +150,11 @@
     <div class="tabs">
       <button type="button" data-type="search"
               class="${param.type=='search' || param.type==null?'active':''}">
-        레시피
+        <fmt:message key="recipe.tab.recipe" />
       </button>
       <button type="button" data-type="recommend"
               class="${param.type=='recommend'?'active':''}">
-        재료
+        <fmt:message key="recipe.tab.ingredient" />
       </button>
     </div>
 
@@ -162,39 +165,40 @@
         <input type="hidden" name="type" value="search"/>
         <div class="search-box">
           <input type="text" name="recipeName"
-                 placeholder="레시피명을 검색하세요."
+                 placeholder="<fmt:message key='recipe.input.recipeName' />"
                  value="${recipeName}"/>
           <img src="${pageContext.request.contextPath}/resources/img/search.png"
                class="search-icon"
-               alt="검색"
+               alt="<fmt:message key='recipe.alt.search' />"
                onclick="this.closest('form').submit()"/>
         </div>
       </form>
     </c:if>
 
     <!-- 재료 기반 추천 폼 -->
-<c:if test="${param.type=='recommend'}">
-  <form method="post"
-        action="${pageContext.request.contextPath}/recipe/search_recommend.do">
-    <input type="hidden" name="type" value="recommend"/>
-    <div class="search-box">
-      <input type="text" name="ingredientName"
-             placeholder="재료를 입력하세요."
-             value="${ingredientName}"/>
-      <img src="${pageContext.request.contextPath}/resources/img/search.png"
-           class="search-icon"
-           alt="검색"
-           onclick="this.closest('form').submit()"/>
-    </div>
-  </form>
-</c:if>
+    <c:if test="${param.type=='recommend'}">
+      <form method="post"
+            action="${pageContext.request.contextPath}/recipe/search_recommend.do">
+        <input type="hidden" name="type" value="recommend"/>
+        <div class="search-box">
+          <input type="text" name="ingredientName"
+                 placeholder="<fmt:message key='recipe.input.ingredient' />"
+                 value="${ingredientName}"/>
+          <img src="${pageContext.request.contextPath}/resources/img/search.png"
+               class="search-icon"
+               alt="<fmt:message key='recipe.alt.search' />"
+               onclick="this.closest('form').submit()"/>
+        </div>
+      </form>
+    </c:if>
 
     <hr/>
 
     <!-- 결과 타이틀 -->
     <c:if test="${not empty recipes}">
-      <div class="result-title">레시피 검색 결과</div>
+      <div class="result-title"><fmt:message key="recipe.result.title" /></div>
     </c:if>
+
 	<!-- ✅ 디버깅 코드 넣기 -->
 	<%
 	    System.out.println("✅ [DEBUG] JSP 도착했음!");
@@ -210,6 +214,7 @@
 	        }
 	    }
 	%>
+
 	<!-- 추천/검색 결과 카드 리스트 -->
 	<c:if test="${not empty recipes}">	
 	  <div class="card-list">
@@ -232,15 +237,13 @@
 
     <!-- 레시피 상세(검색) 카드 -->
 	<c:if test="${not empty recipe}">
-	  <div class="result-title">레시피 검색 결과</div>
+	  <div class="result-title"><fmt:message key="recipe.result.title" /></div>
 	  <div class="card-list">
 	    <a class="card"
 	       href="${pageContext.request.contextPath}/recipe/detail.do?name=${recipe.name}">
-	       
 	      <!-- 🔻 이미지 경로를 recipe.imagePath에서 불러옴 -->
 	      <img src="${pageContext.request.contextPath}${recipe.imagePath}"
 	           alt="${recipe.name}"/>
-	           
 	      <div class="info">
 	        <div class="meta">
 	          <span class="time">${recipe.cookingTime}</span>
@@ -253,16 +256,15 @@
 	  </div>
 	</c:if>
 
-
     <!-- 검색 결과 없음 -->
     <c:if test="${empty recipe and not empty recipeName}">
       <p style="color:red; margin-top:1rem;">
-        '${recipeName}'에 해당하는 레시피가 없습니다.
+        '<c:out value="${recipeName}" />' <fmt:message key="recipe.message.notfound" />
       </p>
-      <p>웹에서 검색해보시겠습니까?</p>
+      <p><fmt:message key="recipe.message.searchweb" /></p>
       <p>
         <a href="${googleUrl}" target="_blank">
-          🔗 '${recipeName}' 레시피 구글 검색하기
+          🔗 '<c:out value="${recipeName}" />' <fmt:message key="recipe.link.google" />
         </a>
       </p>
     </c:if>

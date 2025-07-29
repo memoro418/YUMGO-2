@@ -165,7 +165,9 @@
   <img src="${pageContext.request.contextPath}/resources/img/arrow-left.png">
   </a>
   <h1><fmt:message key="fridge.add.title"/></h1>
+  <a href="${pageContext.request.contextPath}/member/mypage.do">
   <img src="${pageContext.request.contextPath}/resources/img/user.png">
+  </a>
 </div>
 
 <!-- ✅ 메인 -->

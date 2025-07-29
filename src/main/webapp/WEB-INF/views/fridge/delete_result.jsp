@@ -244,7 +244,9 @@
 
   <!-- ✅ 헤더 -->
   <div class="header">
-    <img src="${pageContext.request.contextPath}/resources/img/arrow-left.png" class="back-btn" onclick="history.back()">
+    <a href="${pageContext.request.contextPath}/index.do" class="home-link">
+    <img src="${pageContext.request.contextPath}/resources/img/arrow-left.png" class="back-btn">
+    </a>
     <h1><fmt:message key="fridgedelete.title" /></h1>
     <a href="${pageContext.request.contextPath}/member/mypage.do">
       <img src="${pageContext.request.contextPath}/resources/img/user.png" class="user-btn">
@@ -296,20 +298,27 @@
     </div>
 
     <!-- ✅ 삭제 결과 출력 -->
-    <c:if test="${not empty message}">
-      <div class="result-box">
-        <h3><fmt:message key="fridgedelete.result.title" /></h3>
-        <p>${message}</p>
-
-        <c:if test="${not empty deletedItems}">
-          <c:forEach var="item" items="${deletedItems}">
-            <div class="deleted-item">
-              ${item.username} - ${item.foodName} (${item.expirationDate})
-            </div>
-          </c:forEach>
+<c:if test="${not empty message}">
+  <div class="result-box">
+    <h3><fmt:message key="fridgedelete.result.title" /></h3>
+    <p>
+      <fmt:message key="${message}">
+        <c:if test="${not empty deletedCount}">
+          <fmt:param value="${deletedCount}" />
         </c:if>
-      </div>
+      </fmt:message>
+    </p>
+
+    <c:if test="${not empty deletedItems}">
+      <c:forEach var="item" items="${deletedItems}">
+        <div class="deleted-item">
+          ${item.username} - ${item.foodName} (${item.expirationDate})
+        </div>
+      </c:forEach>
     </c:if>
+  </div>
+</c:if>
+
 
     <!-- ✅ 홈으로 돌아가기 -->
     <a href="${pageContext.request.contextPath}/index.do" class="home-link">

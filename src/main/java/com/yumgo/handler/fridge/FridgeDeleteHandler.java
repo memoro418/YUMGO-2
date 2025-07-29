@@ -17,7 +17,9 @@ public class FridgeDeleteHandler implements CommandHandler {
 		FridgeItemDAO dao = new FridgeItemDAO();
 		int result = dao.deleteByUsernameAndFoodName(username, foodName);
 
-		request.setAttribute("message", result > 0 ? "삭제 완료" : "삭제 실패");
+		// 메시지 키로 설정
+		request.setAttribute("message", result > 0 ? "fridgedelete.result.done" : "fridgedelete.result.fail");
+
 		return "fridge/delete_result.jsp";
 	}
 }
