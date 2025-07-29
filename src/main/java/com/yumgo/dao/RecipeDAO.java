@@ -3,6 +3,7 @@ package com.yumgo.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,19 +21,27 @@ public class RecipeDAO {
 
 	// 재료 이름으로 레시피 조회
 	public List<Recipe> getRecipesByIngredientName(String ingredientName) throws SQLException {
-		String sql = "SELECT DISTINCT r.NAME, r.SUMMARY, r.COOKING_TIME, r.CALORIE "
-				+ "FROM RECIPE r JOIN RECIPE_INGREDIENT i ON r.RECIPE_ID = i.RECIPE_ID "
-				+ "WHERE i.INGREDIENT_NAME = ?";
+		String sql = "SELECT DISTINCT r.NAME, r.SUMMARY, r.COOKING_TIME, r.CALORIE, r.IMAGE_PATH "
+		           + "FROM RECIPE r JOIN RECIPE_INGREDIENT i ON r.RECIPE_ID = i.RECIPE_ID "
+		           + "WHERE i.INGREDIENT_NAME = ?";
 		List<Recipe> recipes = new ArrayList<>();
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, ingredientName);
 			try (ResultSet rs = pstmt.executeQuery()) {
+				
+			    // ✅ 컬럼명 전부 출력해보기
+			    ResultSetMetaData meta = rs.getMetaData();
+			    for (int i = 1; i <= meta.getColumnCount(); i++) {
+			        System.out.println(i + " → " + meta.getColumnName(i));
+			    }
 				while (rs.next()) {
 					Recipe r = new Recipe();
 					r.setName(rs.getString("NAME"));
 					r.setSummary(rs.getString("SUMMARY"));
 					r.setCookingTime(rs.getString("COOKING_TIME"));
 					r.setCalorie(rs.getString("CALORIE"));
+	                r.setImagePath(rs.getString("IMAGE_PATH"));
+	                System.out.println(r.getImagePath());
 					recipes.add(r);
 				}
 			}

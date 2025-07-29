@@ -137,7 +137,7 @@
          </a>
     <div class="header-title">레시피 검색</div>
     <a href="${pageContext.request.contextPath}/member/mypage.do">
-  	<img class="user" src="${pageContext.request.contextPath}/resources/img/user.png" alt="사용자 아이콘">
+  	<img class="icon" src="${pageContext.request.contextPath}/resources/img/user.png" alt="사용자 아이콘">
 	</a>
   </div>
 
@@ -195,9 +195,23 @@
     <c:if test="${not empty recipes}">
       <div class="result-title">레시피 검색 결과</div>
     </c:if>
-
-    <!-- 추천/검색 결과 카드 리스트 -->
-    <c:if test="${not empty recipes}">
+	<!-- ✅ 디버깅 코드 넣기 -->
+	<%
+	    System.out.println("✅ [DEBUG] JSP 도착했음!");
+	    Object obj = request.getAttribute("recipes");
+	    if (obj == null) {
+	        System.out.println("⚠️ recipes 값이 NULL");
+	    } else {
+	        java.util.List<com.yumgo.model.Recipe> debugRecipes = 
+	            (java.util.List<com.yumgo.model.Recipe>) obj;
+	        System.out.println("✅ recipes 개수: " + debugRecipes.size());
+	        for (com.yumgo.model.Recipe r : debugRecipes) {
+	            System.out.println("   ▶ " + r.getName() + " | " + r.getImagePath());
+	        }
+	    }
+	%>
+	<!-- 추천/검색 결과 카드 리스트 -->
+	<c:if test="${not empty recipes}">	
 	  <div class="card-list">
 	    <c:forEach var="r" items="${recipes}">
 	      <a class="card"
@@ -215,7 +229,6 @@
 	    </c:forEach>
 	  </div>
 	</c:if>
-
 
     <!-- 레시피 상세(검색) 카드 -->
 	<c:if test="${not empty recipe}">
