@@ -321,9 +321,9 @@
 
 
     <!-- ✅ 홈으로 돌아가기 -->
-    <a href="${pageContext.request.contextPath}/index.do" class="home-link">
+<%--     <a href="${pageContext.request.contextPath}/index.do" class="home-link">
       <fmt:message key="fridgedelete.link.home" />
-    </a>
+    </a> --%>
 
   </div>
 </div>

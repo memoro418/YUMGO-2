@@ -146,7 +146,7 @@
 
 <%-- 카테고리 배열 미리 선언 --%>
 <c:set var="categories">
-  <c:out value="전체,채소류,과일류,유제품,육류,조리반찬,음료,냉동식품,기타" />
+  <c:out value="전체,채소,과일,유제품,육류,반찬,음료,냉동식품,디저트,기타" />
 </c:set>
 <c:set var="categoryList" value="${fn:split(categories, ',')}" />
 <c:set var="selectedCategory" value="${param.category != null ? param.category : '전체'}" />
@@ -169,25 +169,27 @@
       <button type="submit" name="category" value="${cat}" class="category-item">
         <img src="${pageContext.request.contextPath}/resources/img/${
             cat == '전체' ? 'home' :
-            cat == '채소류' ? 'vegetable' :
-            cat == '과일류' ? 'fruits' :
+            cat == '채소' ? 'vegetable' :
+            cat == '과일' ? 'fruits' :
             cat == '유제품' ? 'milk' :
             cat == '육류' ? 'meat' :
-            cat == '조리반찬' ? 'side-dish' :
+            cat == '반찬' ? 'side-dish' :
             cat == '음료' ? 'drink' :
             cat == '냉동식품' ? 'frozen' :
+            cat == '디저트' ? 'dessert' :
             'etc'
         }.png">
         <span>
           <fmt:message key="fridge.category.${
             cat == '전체' ? 'all' :
-            cat == '채소류' ? 'vegetable' :
-            cat == '과일류' ? 'fruits' :
+            cat == '채소' ? 'vegetable' :
+            cat == '과일' ? 'fruits' :
             cat == '유제품' ? 'milk' :
             cat == '육류' ? 'meat' :
-            cat == '조리반찬' ? 'side' :
+            cat == '반찬' ? 'side' :
             cat == '음료' ? 'drink' :
             cat == '냉동식품' ? 'frozen' :
+            cat == '디저트' ? 'dessert' :
             'etc'
           }"/>
         </span>
@@ -216,10 +218,10 @@
         <c:when test="${selectedCategory == '전체'}">
           <fmt:message key="fridge.category.all" />
         </c:when>
-        <c:when test="${selectedCategory == '채소류'}">
+        <c:when test="${selectedCategory == '채소'}">
           <fmt:message key="fridge.category.vegetable" />
         </c:when>
-        <c:when test="${selectedCategory == '과일류'}">
+        <c:when test="${selectedCategory == '과일'}">
           <fmt:message key="fridge.category.fruits" />
         </c:when>
         <c:when test="${selectedCategory == '유제품'}">
@@ -228,7 +230,7 @@
         <c:when test="${selectedCategory == '육류'}">
           <fmt:message key="fridge.category.meat" />
         </c:when>
-        <c:when test="${selectedCategory == '조리반찬'}">
+        <c:when test="${selectedCategory == '반찬'}">
           <fmt:message key="fridge.category.side" />
         </c:when>
         <c:when test="${selectedCategory == '음료'}">
@@ -236,6 +238,9 @@
         </c:when>
         <c:when test="${selectedCategory == '냉동식품'}">
           <fmt:message key="fridge.category.frozen" />
+        </c:when>
+            <c:when test="${selectedCategory == '디저트'}">
+          <fmt:message key="fridge.category.dessert" />
         </c:when>
         <c:otherwise>
           <fmt:message key="fridge.category.etc" />
@@ -257,13 +262,14 @@
       <c:forEach var="item" items="${itemList}">
         <div class="item-card">
           <img src="${pageContext.request.contextPath}/resources/img/${
-            item.category == '채소류' ? 'list-vegetable' :
-            item.category == '과일류' ? 'list-fruits' :
+            item.category == '채소' ? 'list-vegetable' :
+            item.category == '과일' ? 'list-fruits' :
             item.category == '유제품' ? 'list-milk' :
             item.category == '육류' ? 'list-meat' :
-            item.category == '조리반찬' ? 'list-side' :
+            item.category == '반찬' ? 'list-side' :
             item.category == '음료' ? 'list-drink' :
             item.category == '냉동식품' ? 'list-frozen' :
+            item.category == '디저트' ? 'list-dessert' :
             'list-etc'
           }.png">
           <div class="food-name">${item.foodName}</div>

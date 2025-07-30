@@ -133,7 +133,9 @@
 
     <!-- ✅ 헤더 -->
     <div class="header">
-        <img src="${pageContext.request.contextPath}/resources/img/arrow-left.png" onclick="history.back()">
+      <a href="${pageContext.request.contextPath}/index.do">
+        <img src="${pageContext.request.contextPath}/resources/img/arrow-left.png"/>
+        </a>
         <fmt:message key="ingredientsearch.title" />
         <img src="${pageContext.request.contextPath}/resources/img/user.png">
     </div>

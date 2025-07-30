@@ -85,13 +85,35 @@
       color: #555;
       background: transparent;
     }
+    
+      /* ✅ 로그아웃 버튼 */
+    .btn-logout {
+      display: block;
+      width: 200px;
+      height: 40px;
+      margin: 6vh auto 0;
+      font-family: "Pretendard", sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      text-align: center;
+      background: #168B85;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 1px 2px rgba(16,24,40,0.05);
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn-logout:hover {
+      opacity: 0.9;
+    }
 
     /* ✅ 회원탈퇴 버튼 */
     .btn-delete {
       display: block;
       width: 200px;
       height: 40px;
-      margin: 6vh auto 0;
+      margin: 2vh auto 0;
       font-family: "Pretendard", sans-serif;
       font-weight: 600;
       font-size: 16px;
@@ -113,11 +135,13 @@
 <body>
   <div class="container">
 
-    <!-- ✅ 헤더 -->
-    <div class="header">
-      <img src="${pageContext.request.contextPath}/resources/img/arrow-left.png" onclick="history.back()">
-    </div>
+<!-- ✅ 헤더 -->
+<div class="header">
+  <a href="${pageContext.request.contextPath}/index.do">
+  <img src="${pageContext.request.contextPath}/resources/img/arrow-left.png"/>
+  </a>
 
+</div>
     <!-- ✅ 회원 정보 출력 -->
     <div class="form-group">
       <label for="username"><fmt:message key="mypage.label.username" /></label>
@@ -138,7 +162,12 @@
       <label for="email"><fmt:message key="mypage.label.email" /></label>
       <input type="email" id="email" value="${user.email}" readonly>
     </div>
-
+    <!-- ✅ 회원로그아웃 버튼 -->
+    <form action="${pageContext.request.contextPath}/login/logout.do" method="get">
+      <button type="submit" class="btn-logout">
+        <fmt:message key="mypage.button.logout" />
+      </button>
+    </form>
     <!-- ✅ 회원탈퇴 버튼 -->
     <form action="${pageContext.request.contextPath}/member/deleteform.do" method="get">
       <button type="submit" class="btn-delete">

@@ -107,6 +107,16 @@
             font-size: 16px;
             color: #797982;
         }
+        
+          .home-link {
+    display: block;
+    text-align: center;
+    margin: 20px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #168B85;
+    text-decoration: none;
+  }
     </style>
 </head>
 <body>
@@ -164,7 +174,11 @@
                 <li><c:out value="${ingredient.ingredientName}" /></li>
             </c:forEach>
         </ul>
+        
+            
     </div>
+  <a href="#" class = "home-link" onclick="history.back(); return false;">이전으로 돌아가기</a>
+
 
 </div>
 

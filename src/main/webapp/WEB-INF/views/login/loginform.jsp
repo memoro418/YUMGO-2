@@ -48,6 +48,23 @@
             border: 1px solid #c3e6cb;
             color: #155724;
         }
+        .login-container {
+    position: relative; /* 언어 전환 버튼 위치 지정 위해 필요 */
+}
+
+/* 다국어 전환 버튼 위치 스타일 */
+.lang-switch {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.lang-switch a {
+    font-size: 14px;
+    color: #168B85;
+    font-weight: 600;
+    text-decoration: none;
+}
         form label {
             display: block;
             font-weight: 700;
@@ -98,6 +115,16 @@
 <body>
 
     <div class="login-container">
+    <div class="lang-switch">
+  <c:choose>
+    <c:when test="${pageContext.response.locale.language eq 'en'}">
+      <a href="${pageContext.request.contextPath}/login/loginform.do?lang=ko">EN</a>
+    </c:when>
+    <c:otherwise>
+      <a href="${pageContext.request.contextPath}/login/loginform.do?lang=en">KR</a>
+    </c:otherwise>
+  </c:choose>
+</div>
         <c:if test="${not empty message}">
             <div class="alert alert-warning">${message}</div>
         </c:if>
@@ -106,7 +133,7 @@
                 <fmt:message key="login.logout.success" />
             </div>
         </c:if>
-
+  
         <form method="post" action="${pageContext.request.contextPath}/login/login.do">
             <img src="${pageContext.request.contextPath}/resources/img/fulllogo.png" alt="YUMGO Logo" class="login-logo" />
 
