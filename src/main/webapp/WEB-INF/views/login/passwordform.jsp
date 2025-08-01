@@ -150,8 +150,6 @@
             </c:if>
         </form>
 
-        <a href="${pageContext.request.contextPath}/member/mypage.do" class="back-link">이전으로 돌아가기</a>
-
     </div>
 </body>
 </html>
